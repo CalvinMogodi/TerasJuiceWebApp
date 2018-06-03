@@ -1,0 +1,78 @@
+<div class="container page">
+    <div>
+        <h2> <i class="fa fa-address-card fa-icon" style="font-size: 1em !important;"></i>&nbsp;Users Report</h2>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <div class="text-center" *ngIf="loading">
+                <div class="loader"></div>
+                <br>
+                <span style="margin-left: -200px;">Loading...</span>
+            </div>
+            <div class="row" style="margin-right: -20% !important; margin-left: -5px !important;" *ngIf="!loading">
+                <div class="col-md-6">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Awaiting Approval
+                                <div class="panel-control pull-right"> 
+                                   {{awaitingApprovalUsers.length}}
+                                </div>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-striped">
+                                    <tr>
+                                        <th>Customer Name</th>
+                                        <th>ID Number</th>
+                                        <th>Address</th>
+                                        <th>Cell Phone</th>
+                                        <th>Email</th>
+                                    </tr>
+                                    <tr *ngFor='let user of awaitingApprovalUsers'>
+                                        <td>{{user.name}} {{user.surname}}</td>
+                                        <td>{{user.IDNumber}}</td>
+                                        <td>{{user.address}}</td>
+                                        <td>{{user.cellPhone }}</td>
+                                        <td>{{user.email}}</td>
+                                    </tr> 
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Approved
+                                <div class="panel-control pull-right"> 
+                                   {{approvedUsers.length}}
+                                </div>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Customer Name</th>
+                                        <th>ID Number</th>
+                                        <th>Address</th>
+                                        <th>Cell Phone</th>
+                                        <th>Email</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                     <tr *ngFor='let user of approvedUsers'>
+                                        <td>{{user.name}} {{user.surname}}</td>
+                                        <td>{{user.IDNumber}}</td>
+                                        <td>{{user.address}}</td>
+                                        <td>{{user.cellPhone }}</td>
+                                        <td>{{user.email}}</td>
+                                    </tr>      
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

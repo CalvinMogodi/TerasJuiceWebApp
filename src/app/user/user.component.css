@@ -1,0 +1,90 @@
+.stat {
+    border-radius: 5px;
+    padding: 0 10px;
+        
+}
+.content{
+margin-top: 35px;
+    overflow-y: auto;
+    height: 550px;
+    max-height: 550px;
+}
+.striped-bg {
+     background-image: url(/assets/img/bg-strips-light.jpg);
+    background-repeat: repeat;
+}
+
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+.page{
+    padding-top: 32px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+
+.photo-container .dash-profile-inActive {
+    width: 90px;
+    border-color: red;
+    border-width: 3px;
+    margin-top: 9%;
+    height: 90px;
+}
+
+.photo-container .dash-profile-active {
+    width: 90px;
+    border-color: green;
+    border-width: 3px;
+    margin-top: 9%;
+    height: 90px;
+}
+
+.img-circle {
+    border: 2px solid #fff;
+}
+.img-circle {
+    border-radius: 50%;
+}
+img {
+    vertical-align: middle;
+}
+    .page
+{
+    width: auto !important;
+    padding-top: 2% !important;
+    margin-right: 0px !important;
+    margin-left: 14% !important;
+}
+
+.small-text{
+    font-size: small;
+}
+
+.loader {
+       margin-top: 10%;
+    margin-left: 40%;
+       border-bottom: 2px solid;
+    border-top: 3px solid yellow;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.fa-icon{
+    color: darkgreen;
+    margin-top: -15px;
+    font-size: 3em;
+}

@@ -1,0 +1,132 @@
+<div class="container">
+    <div class="page-title clearfix ng-isolate-scope" pagename="Form Components" subtitle="Bootstrap UI Elements">
+        <div class="pull-left">
+            <h3 class="ng-binding" *ngIf="!isEdit">Create New User</h3> <small *ngIf="!isEdit" class="subtitle ng-binding">Please note: this will add the user as employee.</small>
+            <h3 class="ng-binding" *ngIf="isEdit">Edit User</h3> <small *ngIf="isEdit" class="subtitle ng-binding">Only employee's details can be edited.</small>
+        </div>
+    </div>
+    <br>
+    <div class="panel panel-primary" style="margin-left: 15px;">
+        <form [formGroup]="userForm">
+            <div class="row">
+                <div class="text-center" [ngClass]="{'col-md-12':!isUser, 'col-md-6': isUser}">
+                    <div class="photo-container  icon-col striped-bg">
+                        <img [src]="user.profileImgUrl" class="img-circle " [ngClass]="{'dash-profile-inActive':!user.isActive, 'dash-profile-active': user.isActive}">
+                    </div>
+                    <input *ngIf="!isUser" accept="image/*" class="text-center btn btn-primary" type="file" (change)="fileChangeEvent($event)" placeholder="Select Image" />
+                </div>
+                <div *ngIf="isUser" class="col-md-6 photo-container text-center icon-col striped-bg">
+                    <img *ngIf="user.hasUploadedPOP" [src]="user.popImgUrl" class="center-block"><br>
+                     <img *ngIf="!user.hasUploadedPOP" src="" class="img-pop pop-inActive"><br>
+                    <small *ngIf="user.hasUploadedPOP" class="subtitle ng-binding">Proof Of Payment</small>
+                    <small *ngIf="!user.hasUploadedPOP" class="subtitle ng-binding">User has not uploaded proof of payment yet.</small>
+                </div>
+            </div>
+            <div class="row" style="padding: 15px 15px 0px 15px;">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label for="inputtext" class="col-sm-4 col-form-label">First Name</label>
+                        <div class="col-sm-8">
+                            <input type="text" [readonly]="isUser" [value]="user.name" formControlName="name" (input)="user.name = $event.target.value" name="name" required="required" class="form-control underline" id="username">                            
+                        </div>
+                        <div class="error" *ngIf="!userForm.controls.name.valid && (userForm.controls.name.dirty || submitAttempt)">
+                            <small class="red">The field above is required.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label for="inputtext" class="col-sm-4 control-label">ID Number/ Passport</label>
+                        <div class="col-sm-8">
+                            <input type="text" [value]="user.IDNumber" [readonly]="isUser" (input)="user.IDNumber = $event.target.value" formControlName="IDNumber" name="IDNumber" maxlength="13" class="form-control underline"
+                                id="userIDNumber">
+                        </div>
+                        <div class="error" *ngIf="!userForm.controls.IDNumber.valid && (userForm.controls.IDNumber.dirty || submitAttempt)">
+                            <small class="red">The field above is required.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding: 0px 15px 0px 15px;">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label for="inputtext" class="col-sm-4 col-form-label">Surname</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="surname" [readonly]="isUser" (input)="user.surname = $event.target.value" [value]="user.surname" formControlName="surname" class="form-control underline" id="userSurname">
+                        </div>
+                        <div class="error" *ngIf="!userForm.controls.surname.valid && (userForm.controls.surname.dirty || submitAttempt)">
+                            <small>The field above is required.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label for="inputtext" class="col-sm-4 control-label">Cell Phone</label>
+                        <div class="col-sm-8">
+                            <input type="text" [value]="user.cellPhone" [readonly]="isUser" (input)="user.cellPhone = $event.target.value" formControlName="cellPhone" name="cellPhone" class="form-control underline" id="usercellPhone">
+                        </div>
+                        <div class="error" *ngIf="!userForm.controls.cellPhone.valid && (userForm.controls.cellPhone.dirty || submitAttempt)">
+                            <small>The field above is required.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding: 0px 15px 0px 15px;">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label for="inputtext" class="col-sm-4 control-label">Email Address</label>
+                        <div class="col-sm-8"> <input type="email" [readonly]="isUser" [value]="user.email" (input)="user.email = $event.target.value" formControlName="email" class="form-control underline" id="useremail">
+                        </div>
+                        <div class="error" *ngIf="!userForm.controls.email.valid && (userForm.controls.email.dirty || submitAttempt)">
+                            <small class="red">The field above is required.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" *ngIf="isUser">
+                    <div class="form-group row">
+                        <label for="inputtext" class="col-sm-4 control-label">Bank</label>
+                        <div class="col-sm-8"> <input type="text" [readonly]="isUser" [value]="user.bankName" class="form-control underline" id="underline">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 row" *ngIf="!isUser">
+                     <label for="inputtext" class="col-sm-4 control-label">User Role</label>
+                     <div class="col-sm-8">
+                    <select [ngModel]="user.userType" placeholder="Select Role" (input)="user.userType = $event.target.value" formControlName="userType" name="role" class="underline col-sm-12 dropdown">
+                        <option *ngFor="let role of roles" [value]="user.userType" [selected]="user.userType"  name="userType">
+                            {{ role }}
+                        </option>
+                    </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="isUser"  style="padding: 0px 15px 0px 15px;">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label for="inputtext" class="col-sm-4 control-label">Address</label>
+                        <div class="col-sm-8"> <input type="text" [readonly]="isUser" [value]="user.address" class="form-control underline" id="underline">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label for="inputtext" class="col-sm-4 control-label">Account Number</label>
+                        <div class="col-sm-8"> <input type="text" [readonly]="isUser" [value]="user.accountNumber" class="form-control underline" id="underline">
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+            <div class="row"  style="padding: 0px 15px 0px 15px;">
+                <div class="col-md-6">
+                    <button type="button" (click)="back()" class="btn btn-dark pull-left margin-15">Back</button>
+                </div>
+                <div class="col-md-6">
+                    <button *ngIf="!isEdit && !isUser" type="button" (click)="createUser()" class="btn btn-success pull-right margin-15">Create</button>
+                    <button *ngIf="isEdit && !isUser" type="button" (click)="updateUser()" class="btn btn-success pull-right margin-15">Update</button>
+                    <button *ngIf="!user.isActive && isUser" [disabled]="!user.hasUploadedPOP" type="button" (click)="approveUser()" class="btn btn-success pull-right margin-15">Approve</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="container page">
+    <div *ngIf="notification.meaagse != ''">
+        <button type="button" class="close" data-dismiss="modal" style="margin-right: -15px !important;" (click)="closeNotification()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <p [ngClass]="{'red':!notification.isSuccessful, 'green': notification.isSuccessful}">
+            {{notification.meaagse}}
+        </p>
+    </div>
+    <h2> <i class="fa fa-list-alt fa-icon" style="font-size: 1em !important;"></i>&nbsp;Orders</h2>
+    <div class="col-md-12 content">    
+        <div class="text-center" *ngIf="loading">
+            <div class="loader" ></div>    
+            <br>
+              <span style="margin-left: -200px;">Loading...</span>
+        </div>
+        <div *ngFor='let order of orders' class="stat panel striped-bg ng-isolate-scope" >
+            <div class="row" (click)="navigate('#/userDetails', user)">
+                <div class="col-md-1 photo-container text-center bg-info icon-col striped-bg text-center">
+                   <h2 class="dash-profile-inActive"> {{order.quantity}} <br><small style="font-size: 40% !important;">{{order.cost | currency:'ZAR':true}}</small></h2>
+                   
+                </div>
+                <div class="col-md-11 text-col">
+                    <h3 class="ng-binding row"> &nbsp; {{ order.status }}  <span style="font-size: small; padding-top: 18px;">( {{ order.user }}  )</span></h3>
+                    <div class="row">
+                        <div class="col-md-2 padding">
+                            <b>Order Date</b>
+                            <p class="small-text">{{ order.createdDate }}</p>
+                        </div>
+                        <div class="col-md-3 padding">
+                            <b>Delivery Method</b>
+                            <p class="small-text">{{ order.deliveryMethod }}</p>
+                        </div>
+                         <div class="col-md-3 padding">
+                            <b>Payment Method</b>
+                            <p class="small-text">{{ order.paymentMethod }}</p>
+                        </div>
+                         <div class="col-md-2 padding">
+                              <i *ngIf="!order.uploadedPOP" class="fa fa-file-pdf-o fa-icon"></i>
+                              <i *ngIf="order.uploadedPOP" style="color: red" class="fa fa-file-pdf-o fa-icon"></i>
+                            <small>Proof Of Payment</small>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" [disabled]="order.uploadedPOP" (click)="approveOrder(order)" class="btn btn-success pull-right margin-15">Approve</button></div>
+                        </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

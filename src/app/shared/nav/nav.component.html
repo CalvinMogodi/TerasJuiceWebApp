@@ -1,0 +1,29 @@
+<div class="pos-f-t" *ngIf="isMobileMenu()">
+
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="row" style="width: 100%;">
+        <a style=" margin-left: 10%;" class="navbar-brand" href="#"> Teras Herbal Juice</a>
+        <button class="navbar-toggler pull-right" style="margin-left: 20%;" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent"
+          aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+    </div>
+  </nav>
+
+  <ul class="collapse" id="navbarToggleExternalContent" style="height: 0px;margin-left: -40px;">
+    <app-sidebar></app-sidebar>
+  </ul>
+
+</div>
+<nav class="navbar navbar-expand-lg navbar-toggleable-md navbar-inverse fixed-top" style="background-color: seagreen" *ngIf="!isMobileMenu()">
+  <img width="3%" height="9%" src="../assets/img/Teras_Herbal_Juice_Logo.png">
+  <a class="navbar-brand" href="#">Teras Herbal Juice</a>
+  <ul class="nav navbar-nav mr-auto">
+
+  </ul>
+  <ul class="nav navbar-nav">   
+    <li class="nav-item">
+       <a class="nav-link" (click)="logout('#/')" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> &nbsp;Logout</a>
+    </li>
+  </ul>
+</nav>

@@ -1,0 +1,51 @@
+<div class="container page">
+    <div>
+     <h2> <i class="fa fa-users fa-icon" style="font-size: 1em !important;"></i>&nbsp;Users</h2>
+    <i class="fa fa-plus-circle pull-right fa-icon" (click)="navigate('#/userDetails', null)"></i>
+    </div>
+    <div class="col-md-12 content">        
+       <div class="text-center" *ngIf="loading">
+            <div class="loader" ></div>    
+            <br>
+              <span style="margin-left: -200px;">Loading...</span>
+        </div>
+        <div *ngFor='let user of users' class="stat panel striped-bg ng-isolate-scope" bgclass="info" icon="eye" value="71,842" text="Profile Views">
+            <div class="row" (click)="navigate('#/userDetails', user)">
+                <div class="col-md-1 photo-container text-center bg-info icon-col striped-bg text-center">
+                    <img [src]="user.profileImgUrl" class="img-circle " [ngClass]="{'dash-profile-inActive':!user.isActive, 'dash-profile-active': user.isActive}" >
+                </div>
+                <div class="col-md-11 text-col">
+                    <h2 class="ng-binding row"> &nbsp; {{ user.name }} {{ user.surname }}  <span style="font-size: small; padding-top: 18px;">( {{ user.userType }} )</span></h2>
+                    <div class="row">
+                        <div class="col-md-2 padding">
+                            <b>ID Number</b>
+                            <p class="small-text">{{ user.IDNumber }}</p>
+                        </div>
+                        <div class="col-md-2 padding">
+                            <b>Refference ID</b>
+                            <p class="small-text">{{ user.refferenceId }}</p>
+                        </div>
+                         <div class="col-md-2 padding">
+                            <b>Account Number</b>
+                            <p class="small-text">{{ user.accountNumber }}</p>
+                        </div>
+                        <div class="col-md-2 padding">
+                            <b>Address</b>
+                            <p class="small-text">{{ user.address }}</p>
+                        </div>
+                        <div class="col-md-2 padding">
+                            <b>Cell Phone</b>
+                            <p class="small-text">{{ user.cellPhone }}</p>
+                        </div>
+                        <div class="col-md-2 padding">
+                            <b>Email</b>
+                            <p class="small-text">{{ user.email }}</p>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

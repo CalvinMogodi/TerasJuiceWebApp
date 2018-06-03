@@ -1,0 +1,40 @@
+body {
+  padding-top: 5rem;
+      
+}
+.starter-template {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+.wrapper {
+    display: flex;
+    align-items: stretch;
+}
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    min-height: 100vh;
+}
+
+.main-panel{
+    width: 100%;   
+}
+
+@media (min-width: 1200px) {
+  .margin-top-40{
+    margin-top: 40px
+  }
+  .main-panel{
+    width: 100%;  
+    margin-top: 60px; 
+}
+
+  .footer{    
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    line-height: 60px;
+    background-color: #f5f5f5;
+    text-align: center;}
+}

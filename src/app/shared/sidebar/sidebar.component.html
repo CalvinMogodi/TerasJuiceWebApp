@@ -1,0 +1,84 @@
+<div class="striped-bg" id="sidenav" ng-controller="TabsDemoCtrl">
+    <div id="navTabs">
+        <div class="sidebar-controllers sidebar-top-nav">
+            <div justified="true" class="ng-isolate-scope">
+                <div class="tab-content ps-container ps-active-y">
+                    <!-- ngRepeat: tab in tabs -->
+                    <div class="tab-pane ng-scope active" ng-class="{active: tab.active}" tab-content-transclude="tab">                       
+                        <div class="ng-scope">
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <div class="tab-pane active" id="menu">
+                                <div class="photo-container text-center">
+                                    <img [src]="profileImgUrl" class="img-circle dash-profile">
+                                    <div class="t-p">
+                                        <a>{{displayName}}</a> </div>
+                                </div>
+                                <ul class="sidebar-nav" >
+                                    <li class="menu-text" (click)="navigate('#/dashboard')">
+                                        <span ui-sref="home">
+                                            <i class="fa fa-home"></i>
+                                            <span class="" span="">Home</span>
+                                        </span>
+                                    </li>
+                                    <li class="menu-text" (click)="navigate('/stock')">
+                                        <span ui-sref="home">
+                                            <i class="fa fa-product-hunt"></i>
+                                            <span  span="">Stock</span>
+                                        </span>
+                                    </li>
+                                    <li class="menu-text" (click)="navigate('/user')">
+                                        <span ui-sref="home">
+                                            <i class="fa fa-users"></i>
+                                            <span  span="">Users</span>
+                                        </span>
+                                    </li>
+                                    <li class="menu-text" (click)="navigate('/order')">
+                                        <span ui-sref="home">
+                                            <i class="fa fa-list-alt"></i>
+                                            <span span="">Orders</span>
+                                        </span>
+                                    </li>
+                                    <li >
+                                        <a data-toggle="collapse" href="#collapseReport" >
+                                            <i class="fa fa-home"></i>
+                                            <span >Reports <i class="fa fa-angle-down pull-right" style="padding-right: 15px; padding-top: 10px;"></i></span>
+                                        </a>
+                                         <ul class="collapse" id="collapseReport" style="height: 0px;">
+                                            <li (click)="navigate('/orderReport')" class="menu-text"><i class="fa fa-file-text-o"></i> Orders Report</li>
+                                            <li (click)="navigate('/userReport')" class="menu-text"><i class="fa fa-address-card"></i> User Report</li>
+                                            <li (click)="navigate('/executiveReport')" class="menu-text"><i class="fa fa-stack-exchange"></i> Executive Report</li>
+
+                                        </ul>
+                                    </li>
+                                    <!-- <li>
+                                        <a data-toggle="collapse" href="#collapseExample">
+                                            <i class="fa fa-toggle-off" ></i>
+                                            <span class="menu-text">UI Elements <i class="fa fa-angle-down pull-right" style="padding-right: 15px;"></i></span>
+                                        </a>
+                                        <ul class="collapse" id="collapseExample" style="height: 0px;">
+                                            <li ng-class="{active: $state.includes('button')}"><a ui-sref="button" href="#/dashboard/ui-elements/button"><i class="fa fa-circle-o"></i> Button</a></li>
+                                            <li ng-class="{active: $state.includes('dropdown')}"><a ui-sref="dropdown" href="#/dashboard/ui-elements/dropdown"><i class="fa fa-arrows-v"></i> Dropdown</a></li>
+                                            <li ng-class="{active: $state.includes('other-elements')}"><a ui-sref="other-elements" href="#/dashboard/ui-elements/other-elements"><i class="fa fa-flag-o"></i> Other Elements</a></li>
+                                            <li ng-class="{active: $state.includes('pagination')}"><a ui-sref="pagination" href="#/dashboard/ui-elements/pagination"><i class="fa fa-exchange"></i> Breadcrumbs &amp; Pagination</a></li>
+
+                                        </ul>
+                                    </li>-->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end ngRepeat: tab in tabs -->
+        <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 3px;">
+            <div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div>
+        </div>
+        <div class="ps-scrollbar-y-rail" style="top: 0px; height: 673px; right: 3px;">
+            <div class="ps-scrollbar-y" style="top: 0px; height: 563px;"></div>
+        </div>
+    </div>
+</div>

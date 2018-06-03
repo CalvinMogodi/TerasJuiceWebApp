@@ -1,0 +1,169 @@
+<div class="starter-template login-background">
+  <section>
+    <div class="container">
+      <div class="card">
+        <div class="row align-middle">
+          <div class="col-md-6">
+            <div class="card-block login-left-div">
+              <img width="70%" height="90%" src="../assets/img/Teras_Herbal_Juice_Logo.png">
+            </div>
+          </div>
+          <div class="col-md-6 login-right">
+            <form [formGroup]="loginForm">
+
+              <div class="card-block login-right-div" *ngIf="showLogin">
+                <br>
+                <h6 class="card-title">Login to your Account</h6>
+                <br>
+
+                <div class="input-group">
+                  <input [value]="user.email" formControlName="email" (input)="user.email = $event.target.value" name="email" required="required"
+                    type="email" class="form-control underline" placeholder="Username" aria-describedby="basic-addon1"><br><br>
+
+                </div>
+                <div *ngIf="!loginForm.controls.email.valid && (loginForm.controls.email.dirty || submitAttempt)">
+                  <small class="red">The field above is required.</small>
+                </div>
+                <br>
+                <div class="input-group">
+                  <input [value]="user.password" formControlName="password" (input)="user.password = $event.target.value" name="password" required="required"
+                    type="password" class="form-control underline" placeholder="Password" aria-describedby="basic-addon1">
+                </div>
+                <div *ngIf="!loginForm.controls.password.valid && (loginForm.controls.password.dirty || submitAttempt)">
+                  <small class="red">The field above is required.</small>
+                </div>
+                <br>
+                <button *ngIf="!loading" type="button" [disabled]="loading" class="btn login-btn" (click)="Login()">                  
+                    Login
+                </button>
+
+                <button *ngIf="loading" type="button" [disabled]="loading" class="btn login-btn" (click)="Login()">                  
+                    Loading...   <div class="text-center" > <div class="loader" ></div>           </div>
+                </button>
+                <p *ngIf="showError" style="color: red;font-size:small"> invalid email or password. </p>
+                <br>
+                <br>
+                <div class="row">
+
+                  <!--<div class="col-md-6">
+                <a href="#" class="login-link" (click)="OpenAction('Register User')">Don't have an Account?</a>
+           </div>   -->
+                  <div class="col-md-12">
+                    <a href="#" class="login-link" (click)="OpenAction('Forgot Password')">Forgot Password?</a>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="card-block login-right-div" *ngIf="showRegisterUser">
+              <br>
+              <h6 class="card-title">Create your Account</h6>
+              <br>
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Dispaly Name" aria-describedby="basic-addon1">
+              </div>
+              <br>
+              <div class="input-group">
+                <input type="email" class="form-control" placeholder="Email" aria-describedby="basic-addon1">
+              </div>
+              <br>
+
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Mobile Number" aria-describedby="basic-addon1">
+              </div>
+              <br>
+              <button type="button" class="btn login-btn" (click)="SignUp()">Sign Up</button>
+              <br>
+              <br>
+              <div class="row">
+                <div class="col-md-12">
+                  <a href="#" class="login-link" (click)="OpenAction('Login')">Already have an Account?</a>
+                </div>
+              </div>
+            </div>
+            <div class="card-block login-right-div" *ngIf="showForgotPassword">
+              <br>
+              <h6 class="card-title">Forgot your password</h6>
+              <br>
+              <div class="input-group">
+                <input type="email" class="form-control" placeholder="Email" aria-describedby="basic-addon1">
+              </div>
+              <div class="input-group">
+                <input type="number" class="form-control" placeholder="ID Number" aria-describedby="basic-addon1">
+              </div>
+              <div class="input-group">
+                <input type="New Password" class="form-control" placeholder="New Password" aria-describedby="basic-addon1">
+              </div>
+              <div class="input-group">
+                <input type="password" class="form-control" placeholder="Confirm Password" aria-describedby="basic-addon1">
+              </div>
+              <br>
+              <button type="button" class="btn login-btn" (click)="ForgotPassword()">Change Password</button>
+              <br>
+              <br>
+              <div class="row">
+                <div class="col-md-12">
+                  <a href="#" class="login-link" (click)="OpenAction('Login')">Back to login</a>
+                </div>
+              </div>
+            </div>
+            <div class="card-block login-right-div" *ngIf="showChangePassword">
+              <br>
+              <h6 class="card-title">Change password</h6>
+              <br>
+              <form [formGroup]="changePasswordForm">
+                <div class="input-group">
+                  <input type="password" (ngModelChange)="validatePasswor()" class="form-control underline" placeholder="New Password" formControlName="cpPassword"
+                    (input)="cpUser.cpPassword = $event.target.value" name="cpPassword" required="required" aria-describedby="basic-addon1">
+                </div>
+                <div *ngIf="!changePasswordForm.controls.cpPassword.valid && (changePasswordForm.controls.cpPassword.dirty || cpSubmitAttempt)">
+                  <small class="red">The field above is required.</small>
+                </div>
+                <small class="red" *ngIf="showPasswordError">Password must contain lowercase case, a capital (uppercase) letter, a number and minimun of 6 characters.</small>
+                <div class="input-group">
+                  <input type="password" (ngModelChange)="validatePasswor()" class="form-control underline" placeholder="Confirm Password"
+                    formControlName="cpConfirmPassword" (input)="cpUser.cpConfirmPassword = $event.target.value" name="cpConfirmPassword"
+                    required="required" aria-describedby="basic-addon1">
+                </div>
+                <div *ngIf="!changePasswordForm.controls.cpConfirmPassword.valid && (changePasswordForm.controls.cpConfirmPassword.dirty || cpSubmitAttempt)">
+                  <small class="red">The field above is required.</small>
+
+                </div>
+                <small class="red" *ngIf="showPasswordsError">Passwords do not match.</small>
+                <br>
+                <br>
+                <button type="button" class="btn login-btn" [disabled]="disableChangePassword" (click)="ChangePassword()">Change Password</button>
+                <br>
+                <br>
+                <div class="row">
+                  <div class="col-md-12">
+                    <a href="#" class="login-link" (click)="OpenAction('Login')">Back to login</a>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="card-block login-right-div" *ngIf="showOTP">
+              <br>
+              <h6 class="card-title">One Time Password</h6>
+              <br>
+              <div class="input-group">
+                <input type="number" class="form-control" placeholder="OTP" aria-describedby="basic-addon1">
+              </div>
+              <br>
+              <button type="button" class="btn login-btn" (click)="Submit()">Submit</button>
+              <br>
+              <br>
+              <div class="row">
+                <div class="col-md-12">
+                  <a href="#" class="login-link" (click)="OpenAction('Login')">Back to login</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!--https://dashy.strapui.com/angular/?utm_source=StartAngular&utm_medium=StartAngular&utm_campaign=StrapUI#/login
+https://getbootstrap.com/docs/4.0/components/navbar/?
+-->

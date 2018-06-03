@@ -1,0 +1,40 @@
+<div class="container page">
+    <div>
+     <h2> <i class="fa fa-stack-exchange fa-icon" style="font-size: 1em !important;"></i>&nbsp;Executive Report</h2>
+    </div>
+    <div class="col-md-12 content">        
+              <div>
+  <div style="display: block">
+    <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+  </div>
+  <div class="btn-group">
+  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Select Year
+  </button>
+  <div class="dropdown-menu">
+    <span class="dropdown-item" (click)="selectYear(2018)">2018</span>
+    <span class="dropdown-item" (click)="selectYear(2019)">2019</span>
+    <span class="dropdown-item" (click)="selectYear(2020)">2020</span>
+    <span class="dropdown-item" (click)="selectYear(2020)">2020</span>
+    <span class="dropdown-item" (click)="selectYear(2021)">2021</span>
+    <span class="dropdown-item" (click)="selectYear(2022)">2022</span>
+    <span class="dropdown-item" (click)="selectYear(2023)">2023</span>
+    <span class="dropdown-item" (click)="selectYear(2024)">2024</span>
+    <span class="dropdown-item" (click)="selectYear(2025)">2025</span>
+    <span class="dropdown-item" (click)="selectYear(2026)">2026</span>
+    <span class="dropdown-item" (click)="selectYear(2027)">2027</span>
+    <span class="dropdown-item" (click)="selectYear(2028)">2028</span>
+    <span class="dropdown-item" (click)="selectYear(2029)">2029</span>
+    <span class="dropdown-item" (click)="selectYear(2030)">2030</span>
+  </div>
+</div>
+</div>
+    </div>
+</div>

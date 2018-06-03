@@ -1,0 +1,340 @@
+<div class="container page">
+     <h2> <i class="fa fa-list-alt fa-icon" style="font-size: 1em !important;"></i>&nbsp;Stock</h2>
+<div class="col-md-12 calendar-col text-center">
+    <div class="panel panel-primary">
+        <div class="panel-body">
+             <div class="text-center" *ngIf="loading">
+            <div class="loader" ></div>    
+            <br>
+              <span style="margin-left: 5px;">Loading...</span>
+        </div>
+            <div class="row">
+                <div class="col-md-12 text-center" >
+                <h2 class="today">Totals</h2> 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center" >
+                <span class="fc-header-title">Manufactured: {{manufactured}}</span> &nbsp; &nbsp; 
+                <span class="fc-header-title">Avaliable: {{avaliableTotal}}</span> &nbsp; &nbsp;
+                <span class="fc-header-title">Sold: {{soldTotal}}</span>
+                </div>
+            </div>
+            <br>
+             <br>
+            <div class="row">
+                <div class="col-md-3 calendar-wrapper">
+                    <div class="today">
+                        <h6>Monthy Statistics </h6>
+                        <h2 class="date ng-binding day">{{monthData.manufactured}}<small style="font-size: 20% !important;">Total</small></h2> 
+                        <span  class="month ng-binding">{{monthData.avaliableTotal}}</span> Avaliable<br> 
+                        <span  class="month ng-binding">{{monthData.soldTotal}}</span>Sold </div>
+                </div>
+                <!-- relinkEvent: resize -->
+                <div class="col-md-6 ng-scope" relink-event="resize">
+                    <div class="calendar-widget ng-pristine ng-untouched ng-valid ng-isolate-scope fc fc-ltr" ui-calendar=""
+                        ng-model="eventSources">
+                        <table class="fc-header" style="width:100%">
+                            <tbody>
+                                <tr>
+                                    <td class="fc-header-left" ></td>
+                                    <td class="fc-header-center"></td>
+                                    <td class="fc-header-right">
+                                            
+                                                
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="fc-content" style="position: relative;">
+                            <div class="fc-view fc-view-month fc-grid" style="position:relative" unselectable="on">
+                                <div class="fc-event-container" style="position:absolute;z-index:8;top:0;left:0"></div>
+                                <table class="fc-border-separate" style="width:100%" cellspacing="0">
+                                    <thead>
+                                        <tr class="fc-first fc-last">
+                                            <th colspan="5"><span class="fc-header-title"><h2>{{date.monthName}} {{date.year}}</h2></span></th>
+                                            <th class="fc-day-header fc-mon fc-widget-header" style="width: 54px;"><span class="fc-button fc-button-prev fc-state-default fc-corner-left"
+                                                unselectable="on"><span (click)="goToPreviousMonth()"  class="fc-text-arrow">‹</span></span></th>
+                                            <th class="fc-day-header fc-tue fc-widget-header" style="width: 54px;"><span class="fc-button fc-button-next fc-state-default fc-corner-right"
+                                                    unselectable="on"><span (click)="goToNextMonth()" class="fc-text-arrow">›</span></span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="fc-week fc-first">
+                                            <td class="fc-day fc-sun fc-widget-content fc-past fc-first" data-date="2018-04-01">
+                                                <div style="min-height: 43px;">
+                                                    <div class="fc-day-number" (click)="selectedDayData(1)">1</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="fc-day fc-mon fc-widget-content fc-past" data-date="2018-04-02">
+                                                <div>
+                                                    <div class="fc-day-number" (click)="selectedDayData(2)">2</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="fc-day fc-tue fc-widget-content fc-past" data-date="2018-04-03">
+                                                <div>
+                                                    <div class="fc-day-number" (click)="selectedDayData(3)">3</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="fc-day fc-wed fc-widget-content fc-past" data-date="2018-04-04">
+                                                <div>
+                                                    <div class="fc-day-number" (click)="selectedDayData(4)">4</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="fc-day fc-thu fc-widget-content fc-past" data-date="2018-04-05">
+                                                <div>
+                                                    <div class="fc-day-number" (click)="selectedDayData(5)">5</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="fc-day fc-fri fc-widget-content fc-past" data-date="2018-04-06">
+                                                <div>
+                                                    <div class="fc-day-number" (click)="selectedDayData(6)">6</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="fc-day fc-fri fc-widget-content fc-past fc-last" data-date="2018-04-07">
+                                                <div>
+                                                    <div class="fc-day-number" (click)="selectedDayData(7)">7</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="fc-week">
+                                            <td class="fc-day fc-sun fc-widget-content fc-past fc-first" data-date="2018-04-08">
+                                                <div style="min-height: 43px;">
+                                                    <div class="fc-day-number" (click)="selectedDayData(8)">8</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="fc-day fc-mon fc-widget-content fc-past" data-date="2018-04-09">
+                                                <div>
+                                                    <div class="fc-day-number" (click)="selectedDayData(9)">9</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="fc-day fc-tue fc-widget-content fc-past" data-date="2018-04-10">
+                                                <div>
+                                                    <div class="fc-day-number" (click)="selectedDayData(10)">10</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="fc-day fc-wed fc-widget-content fc-past" data-date="2018-04-11">
+                                                <div>
+                                                    <div class="fc-day-number" (click)="selectedDayData(11)">11</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="fc-day fc-thu fc-widget-content fc-past" data-date="2018-04-12">
+                                                <div>
+                                                    <div class="fc-day-number" (click)="selectedDayData(12)">12</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="fc-day fc-fri fc-widget-content fc-past" data-date="2018-04-13">
+                                                <div>
+                                                    <div class="fc-day-number" (click)="selectedDayData(13)">13</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="fc-day fc-sat fc-widget-content fc-past fc-last" data-date="2018-04-14">
+                                                <div>
+                                                    <div class="fc-day-number" (click)="selectedDayData(14)">14</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="fc-week">
+                                            <td class="fc-day fc-sun fc-widget-content fc-past fc-first" data-date="2018-04-15">
+                                                <div style="min-height: 43px;">
+                                                    <div class="fc-day-number" (click)="selectedDayData(15)">15</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="fc-day fc-mon fc-widget-content fc-past" data-date="2018-04-16">
+                                                <div>
+                                                    <div class="fc-day-number" (click)="selectedDayData(16)">16</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="fc-day fc-tue fc-widget-content fc-past" data-date="2018-04-17">
+                                                <div>
+                                                    <div class="fc-day-number" (click)="selectedDayData(17)">17</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="fc-day fc-wed fc-widget-content fc-past" data-date="2018-04-18">
+                                                <div>
+                                                    <div class="fc-day-number" (click)="selectedDayData(18)">18</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="fc-day fc-thu fc-widget-content fc-past" data-date="2018-04-19">
+                                                <div>
+                                                    <div class="fc-day-number" (click)="selectedDayData(19)">19</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="fc-day fc-fri fc-widget-content fc-past" data-date="2018-04-20">
+                                                <div>
+                                                    <div class="fc-day-number" (click)="selectedDayData(20)">20</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="fc-day fc-sat fc-widget-content fc-past fc-last" data-date="2018-04-21">
+                                                <div>
+                                                    <div class="fc-day-number" (click)="selectedDayData(21)">21</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="fc-week">
+                                            <td class="fc-day fc-sun fc-widget-content fc-past fc-first" data-date="2018-04-22">
+                                                <div style="min-height: 43px;">
+                                                    <div class="fc-day-number" (click)="selectedDayData(22)">22</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="fc-day fc-mon fc-widget-content fc-past" data-date="2018-04-23">
+                                                <div>
+                                                    <div class="fc-day-number" (click)="selectedDayData(23)">23</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="fc-day fc-tue fc-widget-content fc-past" data-date="2018-04-24">
+                                                <div>
+                                                    <div class="fc-day-number" (click)="selectedDayData(24)">24</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="fc-day fc-wed fc-widget-content fc-past" data-date="2018-04-25">
+                                                <div>
+                                                    <div class="fc-day-number" (click)="selectedDayData(25)">25</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="fc-day fc-thu fc-widget-content fc-past" data-date="2018-04-26">
+                                                <div>
+                                                    <div class="fc-day-number" (click)="selectedDayData(26)">26</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="fc-day fc-fri fc-widget-content fc-past" data-date="2018-04-27">
+                                                <div>
+                                                    <div class="fc-day-number" (click)="selectedDayData(27)">27</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="fc-day fc-sat fc-widget-content fc-past fc-last" data-date="2018-04-28">
+                                                <div>
+                                                    <div class="fc-day-number" (click)="selectedDayData(28)">28</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="fc-week">
+                                            <td *ngIf="date.lastDay == 30 || date.lastDay == 31 || date.lastDay == 29" class="fc-day fc-sun fc-widget-content fc-past fc-first" data-date="2018-04-29">
+                                                <div style="min-height: 43px;">
+                                                    <div class="fc-day-number" (click)="selectedDayData(29)">29</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td *ngIf="date.lastDay == 30 || date.lastDay == 31" class="fc-day fc-mon fc-widget-content fc-past" data-date="2018-04-30">
+                                                <div>
+                                                    <div class="fc-day-number" (click)="selectedDayData(30)">30</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                             <td *ngIf="date.lastDay == 31" class="fc-day fc-mon fc-widget-content fc-past" data-date="2018-04-30">
+                                                <div>
+                                                    <div class="fc-day-number" (click)="selectedDayData(31)">31</div>
+                                                    <div class="fc-day-content">
+                                                        <div style="position: relative; height: 0px;">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                </div>
+                
+            </div>
+            <div class="col-md-3 calendar-wrapper">               
+                    <div class="today">
+                             <h6>Daily Statistics </h6>
+                        <h2 class="date ng-binding day">{{dayData.manufactured}} <small style="font-size: 20% !important; margin-left: -15px;">Total</small></h2> 
+                        <span  class="month ng-binding">{{dayData.avaliableTotal}}</span> Avaliable<br> 
+                        <span  class="month ng-binding">{{dayData.soldTotal}}</span> Sold </div>
+                </div>
+        </div>
+    </div>
+
+</div>
+</div>

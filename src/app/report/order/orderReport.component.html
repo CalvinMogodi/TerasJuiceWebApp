@@ -1,0 +1,169 @@
+<div class="container page">
+    <div>
+        <h2> <i class="fa fa-file-text-o fa-icon" style="font-size: 1em !important;"></i>&nbsp;Order Report</h2>
+    </div>
+    <div class="col-md-12 content">
+        
+        <div class="row">
+            <form class="form-inline">
+                <div class="form-group">
+                    <div class="col-md-5">
+                        <div class="input-group">
+                            <label>From Date</label>&nbsp; &nbsp;
+                            <input class="form-control" [(ngModel)]="model" placeholder="dd-mm-yyyy" name="fromDate" ngbDatepicker #fromDate="ngbDatepicker" required="required">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" (click)="fromDate.toggle()" type="button">
+          <img src="../assets/img/calendar-icon.jpg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+        </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="input-group">
+                            <label>To Date</label>&nbsp; &nbsp;
+                            <input class="form-control" [(ngModel)]="model1" placeholder="dd-mm-yyyy" name="dp" ngbDatepicker #toDate="ngbDatepicker" required="required">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" (click)="toDate.toggle()" type="button">
+          <img src="../assets/img/calendar-icon.jpg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+        </button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-2 pull-right">
+                        <button class="btn login-btn"  [disabled]="loading" (click)="filterOrders()" type="button" *ngIf="!loading">Search</button>
+                        <button class="btn login-btn"  [disabled]="loading" (click)="filterOrders()" type="button" *ngIf="loading">               
+                    Loading...   <div class="text-center" > <div class="loader" ></div>           </div>
+                </button>
+                    </div>
+                </div>
+            </form>   
+               </div>        
+            <br><br><br>           
+            <div class="row" style="margin-right: -20% !important; margin-left: -5px !important;" *ngIf="!loading">
+                <div class="col-md-6">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Pending Payment
+                                <div class="panel-control pull-right">
+                                    {{pendingPaymentOrders.length}}
+                                </div>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Order Reference #</th>
+                                    <th>Quantity/ Price</th>
+                                    <th>Date</th>
+                                    <th>Delivery Method</th>
+                                    <th>Payment Method</th>
+                                </tr>
+                                <tr *ngFor='let order of pendingPaymentOrders'>
+                                    <td></td>
+                                    <td><b>{{order.quantity}} </b>&nbsp;{{order.cost | currency:'ZAR':true}} </td>
+                                    <td>{{order.createdDate}}</td>
+                                    <td>{{order.deliveryMethod}}</td>
+                                    <td>{{order.paymentMethod}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Awaiting Approval
+                                <div class="panel-control pull-right">
+                                    {{awaitingApprovalOrders.length}}
+                                </div>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Order Reference #</th>
+                                        <th>Quantity/ Price</th>
+                                        <th>Date</th>
+                                        <th>Delivery Method</th>
+                                        <th>Payment Method</th>
+                                    </tr>
+                                </thead>
+                                <tr *ngFor='let order of awaitingApprovalOrders'>
+                                    <td></td>
+                                    <td><b>{{order.quantity}} </b>&nbsp;{{order.cost | currency:'ZAR':true}} </td>
+                                    <td>{{order.createdDate}}</td>
+                                    <td>{{order.deliveryMethod}}</td>
+                                    <td>{{order.paymentMethod}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-right: -20% !important; margin-left: -5px !important;" *ngIf="!loading">
+                <div class="col-md-6">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Awaiting Final Approval
+                                <div class="panel-control pull-right">
+                                    {{awaitingFinalApprovalOrders.length}}
+                                </div>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Order Reference #</th>
+                                    <th>Quantity/ Price</th>
+                                    <th>Date</th>
+                                    <th>Delivery Method</th>
+                                    <th>Payment Method</th>
+                                </tr>
+                                <tr *ngFor='let order of awaitingFinalApprovalOrders'>
+                                    <td></td>
+                                    <td><b>{{order.quantity}} </b>&nbsp;{{order.cost | currency:'ZAR':true}} </td>
+                                    <td>{{order.createdDate}}</td>
+                                    <td>{{order.deliveryMethod}}</td>
+                                    <td>{{order.paymentMethod}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Approved
+                                <div class="panel-control pull-right">
+                                    {{approvedOrders.length}}
+                                </div>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Order Reference #</th>
+                                        <th>Quantity/ Price</th>
+                                        <th>Date</th>
+                                        <th>Delivery Method</th>
+                                        <th>Payment Method</th>
+                                    </tr>
+                                </thead>
+                                <tr *ngFor='let order of approvedOrders'>
+                                    <td></td>
+                                    <td><b>{{order.quantity}} </b>&nbsp;{{order.cost | currency:'ZAR':true}} </td>
+                                    <td>{{order.createdDate}}</td>
+                                    <td>{{order.deliveryMethod}}</td>
+                                    <td>{{order.paymentMethod}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
