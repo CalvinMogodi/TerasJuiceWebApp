@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
   displayName: string = '';
+  activeMenu: Number = 0;
   profileImgUrl: string = '';
   constructor( public router: Router) { }
 

@@ -2,7 +2,7 @@
 
   <nav class="navbar navbar-dark bg-dark">
     <div class="row" style="width: 100%;">
-        <a style=" margin-left: 10%;" class="navbar-brand" href="#"> Teras Herbal Juice</a>
+        <a style="color: white;  font-size: xx-large;   font-weight: normal; margin-left: 10%;" class="navbar-brand" href="#"> Teras Herbal Juice</a>
         <button class="navbar-toggler pull-right" style="margin-left: 20%;" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent"
           aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -15,15 +15,15 @@
   </ul>
 
 </div>
-<nav class="navbar navbar-expand-lg navbar-toggleable-md navbar-inverse fixed-top" style="background-color: seagreen" *ngIf="!isMobileMenu()">
-  <img width="3%" height="9%" src="../assets/img/Teras_Herbal_Juice_Logo.png">
-  <a class="navbar-brand" href="#">Teras Herbal Juice</a>
+<nav class="navbar navbar-expand-lg navbar-toggleable-md navbar-inverse fixed-top" style="background-color: white" *ngIf="!isMobileMenu()">
+  <img width="2.8%" height="8%" src="../assets/img/Teras_Herbal_Juice_Logo.png">
+  <a class="navbar-brand" style="color: #32995f;  font-size: large;;" href="#">Teras Herbal Juice</a>
   <ul class="nav navbar-nav mr-auto">
-
+     <h4 class="heading"> <i [ngClass]="headingIcon" style="font-size: 1em !important;"></i>&nbsp;{{heading}}</h4>       
   </ul>
   <ul class="nav navbar-nav">   
     <li class="nav-item">
-       <a class="nav-link" (click)="logout('#/')" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> &nbsp;Logout</a>
+       <a class="nav-link" style="color: #32995f"  (click)="logout('#/')" href="#"><i class="fa fa-sign-out" style="color: darkgreen"  aria-hidden="true"></i> &nbsp;Logout</a>
     </li>
   </ul>
 </nav>

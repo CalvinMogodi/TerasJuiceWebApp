@@ -10,6 +10,8 @@ import { CommonService } from '../../shared/common';
     styleUrls: ['./userDetails.component.css']
 })
 export class UserDetailsComponent implements OnInit {
+     heading: string = 'User Details';
+    headingIcon: string = 'fa fa-users fa-icon';
     loading: boolean = true;
     submitAttempt: boolean = false;
     showError: boolean = false;

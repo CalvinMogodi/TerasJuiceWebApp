@@ -9,6 +9,8 @@ import * as firebase from 'firebase';
     styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
+    heading: string = 'Order';
+    headingIcon: string = 'fa fa-list-alt fa-icon';
     loading: boolean = true;
     orders = [];
     currentUser: any;
@@ -67,13 +69,13 @@ export class OrderComponent implements OnInit {
 
         }
         this.orderService.approveOrder(order).then(result => {
-            if (order.status = 'Awaiting Final Approval') {
-                this.notification.meaagse = 'Order is approved success and waiting for final approval.';
+            if (order.status == 'Awaiting Final Approval') {
+                this.notification.meaagse = 'Order is approved successful and waiting for final approval.';
             } else {
-                this.notification.meaagse = 'Order is approved success and ready for delivery.';
+                this.notification.meaagse = 'Order is approved successful and ready for delivery.';
                 //send email to user
             }
-            this.notification.isSuccessful = false;
+            this.notification.isSuccessful = true;
         }, error => {
             this.notification.meaagse = 'Unable to approve order.';
             this.notification.isSuccessful = false;

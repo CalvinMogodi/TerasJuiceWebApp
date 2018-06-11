@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./deshboard.component.css']
 })
 export class DeshboardComponent implements OnInit {
-
+   heading: string = 'Deshboard';
+    headingIcon: string = 'fa fa-home fa-icon';
   constructor() { }
 
   ngOnInit() {

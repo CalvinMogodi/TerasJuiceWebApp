@@ -15,4 +15,5 @@ export class CommonService {
     getUser(): any {
         return this.user;
     }
+    
 }

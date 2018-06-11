@@ -2,8 +2,8 @@
 {
     width: auto !important;
     padding-top: 2% !important;
-     margin-right: 150px;
-    margin-left: 14% !important;
+    margin-right: 150px;
+    margin-left: 16% !important;
 }
 .calendar-col{
     background: #fff;
@@ -12,7 +12,6 @@
     border-radius: 5px;
     overflow: hidden;
     padding: 0;
-    width: 50%
 }
 fc-corner-left {
     background: 0 0;
@@ -162,4 +161,84 @@ span.month {
     animation: spin 2s linear infinite;
 }
 
- 
+.actionbar-loader {
+          margin-top: -15%;
+    margin-left: 85%;
+       border-bottom: 2px solid;
+    border-top: 3px solid yellow;
+    border-radius: 50%;
+   width: 25px;
+    height: 25px;
+    animation: spin 2s linear infinite;
+}
+
+ .red{
+        background-color: red;
+    color: white;
+    margin-top: -45px;
+    font-family: latoregular;
+    font-size: 16px;
+    margin-left: -42px;
+    margin-right: -15px;
+    padding-left: 20px;
+}
+
+.green{
+        background-color: green;
+    color: white;
+     margin-top: -45px;
+    font-family: latoregular;
+    font-size: 16px;
+    margin-left: -42px;
+    margin-right: -15px;
+    padding-left: 20px;
+}
+
+.table-scroll tbody {
+display:block;
+max-height: 300px;
+overflow-y:scroll;
+}
+.table-scroll thead, tbody tr {
+display:table;
+width:100%;
+table-layout:fixed;
+}
+
+.underline {
+      background: none !important;
+    background-image: none;
+    border: 1px solid orange;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0 0 0 0 !important;
+    color: #FFFFFF;
+    font-family: inherit;
+    font-size: 15px;
+    line-height: 1.2;
+    padding: 5px 4px;
+    transition-duration: 0.1s;
+    box-shadow: none !important;
+    transition: border 300ms ease-out;
+    width: 100% !important;
+}
+
+.login-btn{
+        width: 200px;
+}
+
+.actionBar{
+        margin-right: -200px;
+    margin-left: -10px;
+    color: white !important;
+    background-color: seagreen !important;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.calendar-btn{
+    border: none;
+    background-color: transparent;
+        margin-right: -100px;
+}

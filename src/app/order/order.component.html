@@ -1,5 +1,6 @@
+<app-nav [heading]="heading" [headingIcon]="headingIcon"></app-nav>   
 <div class="container page">
-    <div *ngIf="notification.meaagse != ''">
+    <div *ngIf="notification.meaagse != ''" style="margin-top: 12px;margin-right: -236px;">
         <button type="button" class="close" data-dismiss="modal" style="margin-right: -15px !important;" (click)="closeNotification()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -7,7 +8,6 @@
             {{notification.meaagse}}
         </p>
     </div>
-    <h2> <i class="fa fa-list-alt fa-icon" style="font-size: 1em !important;"></i>&nbsp;Orders</h2>
     <div class="col-md-12 content">    
         <div class="text-center" *ngIf="loading">
             <div class="loader" ></div>    

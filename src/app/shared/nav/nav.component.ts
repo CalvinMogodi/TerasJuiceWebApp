@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserserviceProvider } from '../../providers/userservice/userservice';
 
@@ -10,10 +10,14 @@ declare const $: any;
 })
 export class NavComponent implements OnInit {
 
+  @Input('heading') heading: string;
+  @Input('headingIcon') headingIcon;
+
   constructor(public router: Router, public userService: UserserviceProvider) { }
 
   ngOnInit() {
   }
+  
 
   Navigate(url) {
     this.router.navigate([url]);

@@ -11,6 +11,8 @@ import {NgbDatepickerConfig, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
     styleUrls: ['./orderReport.component.css']
 })
 export class OrderReportComponent implements OnInit {
+    heading: string = 'Order Report';
+    headingIcon: string = 'fa fa-file-text-o fa-icon';
     loading: boolean = true;
     model: NgbDateStruct;
     model1: NgbDateStruct;

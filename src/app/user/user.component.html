@@ -1,15 +1,50 @@
+<app-nav [heading]="heading" [headingIcon]="headingIcon"></app-nav>   
 <div class="container page">
-    <div>
-     <h2> <i class="fa fa-users fa-icon" style="font-size: 1em !important;"></i>&nbsp;Users</h2>
-    <i class="fa fa-plus-circle pull-right fa-icon" (click)="navigate('#/userDetails', null)"></i>
-    </div>
-    <div class="col-md-12 content">        
-       <div class="text-center" *ngIf="loading">
-            <div class="loader" ></div>    
-            <br>
-              <span style="margin-left: -200px;">Loading...</span>
+     <div class="actionBar" >
+            <form class="row">
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <label style="margin-bottom: 0px;">From Date</label>
+                            <input class="underline" [(ngModel)]="model" placeholder="dd-mm-yyyy" name="fromDate" ngbDatepicker #fromDate="ngbDatepicker"
+                                required="required">
+                                <div class="input-group-append">
+                                    <button class="calendar-btn" (click)="fromDate.toggle()" type="button">
+                                        <img src="../assets/img/calendar-icon.jpg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                                    </button>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <label style="margin-bottom: 0px;">To Date</label>
+                            <input class="underline" [(ngModel)]="model1" placeholder="dd-mm-yyyy" name="dp" ngbDatepicker #toDate="ngbDatepicker"
+                                required="required">
+                                <div class="input-group-append">
+                                    <button class="calendar-btn" (click)="toDate.toggle()" type="button">
+                                        <img src="../assets/img/calendar-icon.jpg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                                    </button>
+                                </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <button class="btn btn-primary" style="margin-top: 15px; width: 200px;" [disabled]="loading" (click)="filterOrders()" type="button" *ngIf="!loading">Search</button>
+                        <button class="btn btn-primary" style="margin-top: 15px; width: 200px;" [disabled]="loading" (click)="filterOrders()" type="button" *ngIf="loading">               
+                    Loading...   <div class="text-center" > <div class="loader" ></div>           </div>
+                </button>
+                    </div>
+               
+            </form>
         </div>
-        <div *ngFor='let user of users' class="stat panel striped-bg ng-isolate-scope" bgclass="info" icon="eye" value="71,842" text="Profile Views">
+  <button class="btn btn-primary" style="margin-top: 15px; width: 200px;height: 45px;margin-left: 30px;" (click)="navigate('#/userDetails', null)" type="button">
+             <i class="fa fa-plus-circle fa-icon" style="    margin-top: -4px;font-size: 2em !important;padding-top: 5px; margin-left: -100px;"></i>
+             <p style="margin-right: -35px; margin-top: -28px;">Add New User</p>
+        </button>
+        <br>
+         <br>
+    <div style="    margin-right: -16.7% !important; margin-left: 37px;">
+      
+        <div *ngFor='let user of users' class="stat panel striped-bg ng-isolate-scope row" >
             <div class="row" (click)="navigate('#/userDetails', user)">
                 <div class="col-md-1 photo-container text-center bg-info icon-col striped-bg text-center">
                     <img [src]="user.profileImgUrl" class="img-circle " [ngClass]="{'dash-profile-inActive':!user.isActive, 'dash-profile-active': user.isActive}" >
@@ -47,5 +82,5 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+ </div>
+ </div>

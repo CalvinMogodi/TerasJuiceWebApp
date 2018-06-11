@@ -8,6 +8,9 @@ import * as firebase from 'firebase';
     styleUrls: ['./userReport.component.css']
 })
 export class UserReportComponent implements OnInit {
+    heading: string = 'User Report';
+    headingIcon: string = 'fa fa-address-card fa-icon';
+
     loading: boolean = true;
     awaitingApprovalUsers = [];
     approvedUsers = [];

@@ -8,6 +8,8 @@ import * as firebase from 'firebase';
     styleUrls: ['./executiveReport.component.css']
 })
 export class ExecutiveReportComponent implements OnInit {
+    heading: string = 'Executive Report';
+    headingIcon: string = 'fa fa-stack-exchange fa-icon';
     loading: boolean = true;
     ordersData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     moneyData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0];
@@ -85,7 +87,7 @@ filter(fromDate, toDate){
         priceRef.orderByValue().on("value", juicePrice => {
             let price = juicePrice.val();
             let usersRef = firebase.database().ref('orders');
-            usersRef.orderByChild("createdDate").startAt(fromDate).endAt(toDate).on("value", snapshot => {
+            usersRef.orderByChild("createdDate").startAt(fromDate).on("value", snapshot => {
                 snapshot.forEach(order => {
                     var thisOrder = order.val();
                     if(thisOrder.status == 'Approved'){                    

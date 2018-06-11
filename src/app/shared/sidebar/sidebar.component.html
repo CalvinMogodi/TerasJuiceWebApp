@@ -17,40 +17,31 @@
                                         <a>{{displayName}}</a> </div>
                                 </div>
                                 <ul class="sidebar-nav" >
-                                    <li class="menu-text" (click)="navigate('#/dashboard')">
-                                        <span ui-sref="home">
+                                    <li class="text-center" [ngClass]="{'active-menu': activeMenu == 0, 'menu-text': activeMenu != 0}" (click)="navigate('/dashboard'); activeMenu = 0">
                                             <i class="fa fa-home"></i>
-                                            <span class="" span="">Home</span>
-                                        </span>
+                                            <p>Dashboard</p>
                                     </li>
-                                    <li class="menu-text" (click)="navigate('/stock')">
-                                        <span ui-sref="home">
+                                    <li class="text-center" [ngClass]="{'active-menu': activeMenu == 1, 'menu-text': activeMenu != 1}" (click)="navigate('/stock'); activeMenu = 1">
                                             <i class="fa fa-product-hunt"></i>
-                                            <span  span="">Stock</span>
-                                        </span>
+                                            <p>Stock</p>
                                     </li>
-                                    <li class="menu-text" (click)="navigate('/user')">
-                                        <span ui-sref="home">
+                                    <li class="text-center" [ngClass]="{'active-menu': activeMenu == 2, 'menu-text': activeMenu != 2}" (click)="navigate('/user'); activeMenu = 2">                                        
                                             <i class="fa fa-users"></i>
-                                            <span  span="">Users</span>
-                                        </span>
+                                            <p>Users</p>
                                     </li>
-                                    <li class="menu-text" (click)="navigate('/order')">
-                                        <span ui-sref="home">
+                                    <li class="menu-text text-center" [ngClass]="{'active-menu': activeMenu == 3, 'menu-text': activeMenu != 3}" (click)="navigate('/order'); activeMenu = 3">
                                             <i class="fa fa-list-alt"></i>
-                                            <span span="">Orders</span>
-                                        </span>
+                                            <p>Orders</p>
                                     </li>
-                                    <li >
-                                        <a data-toggle="collapse" href="#collapseReport" >
+                                    <li class="text-center menu-text" >
+                                        <span data-toggle="collapse" href="#collapseReport" >
                                             <i class="fa fa-home"></i>
-                                            <span >Reports <i class="fa fa-angle-down pull-right" style="padding-right: 15px; padding-top: 10px;"></i></span>
-                                        </a>
-                                         <ul class="collapse" id="collapseReport" style="height: 0px;">
-                                            <li (click)="navigate('/orderReport')" class="menu-text"><i class="fa fa-file-text-o"></i> Orders Report</li>
-                                            <li (click)="navigate('/userReport')" class="menu-text"><i class="fa fa-address-card"></i> User Report</li>
-                                            <li (click)="navigate('/executiveReport')" class="menu-text"><i class="fa fa-stack-exchange"></i> Executive Report</li>
-
+                                            <p >Reports <i class="fa fa-angle-down pull-right" style="padding-right: 15px;    margin-left: -1.5em;"></i></p>
+                                        </span>
+                                         <ul class="collapse" id="collapseReport">
+                                            <li (click)="navigate('/orderReport'); activeMenu = 5" class="text-center" [ngClass]="{'active-menu': activeMenu == 5, 'menu-text': activeMenu != 5}"><i class="fa fa-file-text-o"></i> <p>Orders Report</p></li>
+                                            <li (click)="navigate('/userReport'); activeMenu = 6" class="text-center" [ngClass]="{'active-menu': activeMenu == 6, 'menu-text': activeMenu != 6}"><i class="fa fa-address-card"></i> <p>User Report</p></li>
+                                            <li (click)="navigate('/executiveReport'); activeMenu = 7" class="text-center" [ngClass]="{'active-menu': activeMenu == 7, 'menu-text': activeMenu != 7}"><i class="fa fa-stack-exchange"></i> <p>Executive Report</p></li>
                                         </ul>
                                     </li>
                                     <!-- <li>
