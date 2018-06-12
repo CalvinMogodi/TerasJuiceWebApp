@@ -50,13 +50,25 @@ export class StockComponent implements OnInit {
         var lastDay = new Date(year, month, 0).getDate();
         var day = new Date(year, month + 1, 0).getDay(); 
         this.isAdmin = true;
-        
+          var fromDate = new Date();
+         fromDate.setDate(1).toString();
+         var todate = new Date().toString();
       this.model = {year: year, month: month, day: 1};
       this.model1 = {year: year, month: month, day: lastDay};
-      this.filter('1-'+ month +'-'+year, lastDay +'-'+month+'-'+ year);              
+      this.filter(this.toTimestamp(fromDate),this.toTimestamp(todate));           
     }
 
      filterStock() {
+        var fromDate = new Date();
+         var fromDate1 = new Date(fromDate.setDate(this.model.day));
+          var fromDate2 = new Date(fromDate1.setMonth(this.model.month));
+          var fromDate3 =  new Date(fromDate2.setFullYear(this.model.year));
+         var todate = new Date();
+          todate.setDate(this.model1.day);
+          todate.setMonth(this.model1.month);
+           todate.setFullYear(this.model1.year);
+         
+
         var fromMonth = this.model.month.toString();
         var fromYear = this.model.year.toString();
         var fromDay = this.model.day.toString();
@@ -65,11 +77,11 @@ export class StockComponent implements OnInit {
         var toYear = this.model1.year.toString();
         var toDay = this.model1.day.toString();
 
-       this.filter(fromDay + '-' + fromMonth + '-' +  fromYear ,toDay + '-' + toMonth + '-' + toYear);
+       this.filter(this.toTimestamp(fromDate),this.toTimestamp(todate));
     }
 
     filter(fromDate, toDate) {
-        firebase.database().ref('stock').orderByChild("dateCuptured").startAt(fromDate).endAt(toDate).on("value", snapshot => {
+        firebase.database().ref('stock').orderByChild("timestamp").startAt(fromDate).endAt(toDate).on("value", snapshot => {
             this.juices = [];   
         this.manufactured = 0;
         this.rejected = 0;
@@ -78,7 +90,7 @@ export class StockComponent implements OnInit {
                 var juice = item.val();
                 this.manufactured = Number(this.manufactured + Number(juice.newStock));
                 this.rejected = Number(this.rejected + Number(juice.rejected));
-                var dataCuptured = new Date(juice.dataCuptured);               
+                juice.dataCuptured = this.timeConverter(juice.timestamp);               
                 this.juices.push(juice);
                 return false;
             });
@@ -107,7 +119,23 @@ export class StockComponent implements OnInit {
         });       
     }
 
-   
+    toTimestamp(strDate){
+ var datum = Date.parse(strDate);
+ return datum/1000;
+}
+timeConverter(UNIX_timestamp){
+  var a = new Date(UNIX_timestamp * 1000);
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var year = a.getFullYear();
+  var month = months[a.getMonth()];
+  var date = a.getDate();
+  var hour = a.getHours();
+  var min = a.getMinutes();
+  var sec = a.getSeconds();
+  var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+  return time;
+}
+
     submit(){
         this.notification.meaagse = ''; 
         if(this.stock.newStock == '')
@@ -120,8 +148,10 @@ export class StockComponent implements OnInit {
             var year = new Date().getFullYear().toString();
             var month = (new Date().getMonth() + 1).toString();
             var day = new Date().getDate().toString();
+            var strDate = new Date().toString();
+            var toTimestamp = this.toTimestamp(strDate);
             var stock = {
-                dateCuptured: day + '-' + month + '-' +  year,
+                timestamp: toTimestamp,
                 rejected: Number(this.stock.rejectedStock),
                 rejectComment: Number(this.stock.rejectedStock) == 0 ? '' : this.stock.rejectComment,
                 newStock: Number(this.stock.newStock),
