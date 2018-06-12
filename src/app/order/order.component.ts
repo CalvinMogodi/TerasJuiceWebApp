@@ -12,7 +12,8 @@ export class OrderComponent implements OnInit {
     heading: string = 'Order';
     headingIcon: string = 'fa fa-list-alt fa-icon';
     loading: boolean = true;
-    orders = [];
+    awaitingApprovalOrders = [];
+    awaitingFinalApprovalOrders = [];
     currentUser: any;
     public notification = {
         meaagse: '',
@@ -26,9 +27,10 @@ export class OrderComponent implements OnInit {
         let priceRef = firebase.database().ref('juicePrice');
         priceRef.orderByValue().on("value", juicePrice => {
             let price = juicePrice.val();
-            let usersRef = firebase.database().ref('orders');
-            usersRef.orderByValue().on("value", snapshot => {
-                this.orders = [];
+            let orderRef = firebase.database().ref('orders');
+
+            orderRef.orderByChild("status").equalTo("Awaiting Approval").on("value", snapshot => {
+                this.awaitingApprovalOrders = [];
                 snapshot.forEach(order => {
                     var thisOrder = order.val();
                     if(thisOrder.status != 'Approved'){
@@ -36,14 +38,29 @@ export class OrderComponent implements OnInit {
                         thisOrder.key = order.key;
                         if (thisOrder.uploadedPOP) {
                         }
-                        this.orders.push(thisOrder);
-                    }
-                   
-
+                        this.awaitingApprovalOrders.push(thisOrder);
+                    }     
                     return false;
                 });
                 this.loading = false;
             });
+            if(this.currentUser.userType == 'Manager' || this.currentUser.userType == 'Admin'){
+                orderRef.orderByChild("status").equalTo("Awaiting Final Approval").on("value", snapshot => {
+                this.awaitingFinalApprovalOrders = [];
+                snapshot.forEach(order => {
+                    var thisOrder = order.val();
+                    if(thisOrder.status != 'Approved'){
+                        thisOrder.cost = price * thisOrder.quantity;
+                        thisOrder.key = order.key;
+                        if (thisOrder.uploadedPOP) {
+                        }
+                        this.awaitingFinalApprovalOrders.push(thisOrder);
+                    }     
+                    return false;
+                });
+                this.loading = false;
+            });
+            }             
         });
     }
 

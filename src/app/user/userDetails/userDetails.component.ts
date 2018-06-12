@@ -29,6 +29,7 @@ export class UserDetailsComponent implements OnInit {
     ngOnInit() {
         this.user = this.commonService.getUser();
         if (this.user == null) {
+            this.heading = 'Add New User';
             this.isEdit = false;
             this.isUser = false;
             this.user = {
@@ -46,6 +47,7 @@ export class UserDetailsComponent implements OnInit {
         }
         else {
             if (this.user.userType != 'User'){
+                this.heading = 'Edit User';
                     this.isEdit = true;
                      this.isUser = false;
             }else{

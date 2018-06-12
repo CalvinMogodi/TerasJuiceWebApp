@@ -1,86 +1,102 @@
-<app-nav [heading]="heading" [headingIcon]="headingIcon"></app-nav>   
+<app-nav [heading]="heading" [headingIcon]="headingIcon"></app-nav>
 <div class="container page">
-     <div class="actionBar" >
-            <form class="row">
-                    <div class="col-md-4">
-                        <div class="input-group">
-                            <label style="margin-bottom: 0px;">From Date</label>
-                            <input class="underline" [(ngModel)]="model" placeholder="dd-mm-yyyy" name="fromDate" ngbDatepicker #fromDate="ngbDatepicker"
-                                required="required">
-                                <div class="input-group-append">
-                                    <button class="calendar-btn" (click)="fromDate.toggle()" type="button">
+    <div class="actionBar">
+        <form class="row">
+            <div class="col-md-4">
+                <div class="input-group">
+                    <label style="margin-bottom: 0px;">From Date</label>
+                    <input class="underline" [(ngModel)]="model" placeholder="dd-mm-yyyy" name="fromDate" ngbDatepicker #fromDate="ngbDatepicker"
+                        required="required">
+                        <div class="input-group-append">
+                            <button class="calendar-btn" (click)="fromDate.toggle()" type="button">
                                         <img src="../assets/img/calendar-icon.jpg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
                                     </button>
-                                </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="input-group">
-                            <label style="margin-bottom: 0px;">To Date</label>
-                            <input class="underline" [(ngModel)]="model1" placeholder="dd-mm-yyyy" name="dp" ngbDatepicker #toDate="ngbDatepicker"
-                                required="required">
-                                <div class="input-group-append">
-                                    <button class="calendar-btn" (click)="toDate.toggle()" type="button">
-                                        <img src="../assets/img/calendar-icon.jpg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
-                                    </button>
-                                </div>
-                        </div>
-
-                    </div>
-                    <div class="col-md-4 text-center">
-                        <button class="btn btn-primary" style="margin-top: 15px; width: 200px;" [disabled]="loading" (click)="filterOrders()" type="button" *ngIf="!loading">Search</button>
-                        <button class="btn btn-primary" style="margin-top: 15px; width: 200px;" [disabled]="loading" (click)="filterOrders()" type="button" *ngIf="loading">               
-                    Loading...   <div class="text-center" > <div class="loader" ></div>           </div>
-                </button>
-                    </div>
-               
-            </form>
-        </div>
-  <button class="btn btn-primary" style="margin-top: 15px; width: 200px;height: 45px;margin-left: 30px;" (click)="navigate('#/userDetails', null)" type="button">
-             <i class="fa fa-plus-circle fa-icon" style="    margin-top: -4px;font-size: 2em !important;padding-top: 5px; margin-left: -100px;"></i>
-             <p style="margin-right: -35px; margin-top: -28px;">Add New User</p>
-        </button>
-        <br>
-         <br>
-    <div style="    margin-right: -16.7% !important; margin-left: 37px;">
-      
-        <div *ngFor='let user of users' class="stat panel striped-bg ng-isolate-scope row" >
-            <div class="row" (click)="navigate('#/userDetails', user)">
-                <div class="col-md-1 photo-container text-center bg-info icon-col striped-bg text-center">
-                    <img [src]="user.profileImgUrl" class="img-circle " [ngClass]="{'dash-profile-inActive':!user.isActive, 'dash-profile-active': user.isActive}" >
-                </div>
-                <div class="col-md-11 text-col">
-                    <h2 class="ng-binding row"> &nbsp; {{ user.name }} {{ user.surname }}  <span style="font-size: small; padding-top: 18px;">( {{ user.userType }} )</span></h2>
-                    <div class="row">
-                        <div class="col-md-2 padding">
-                            <b>ID Number</b>
-                            <p class="small-text">{{ user.IDNumber }}</p>
-                        </div>
-                        <div class="col-md-2 padding">
-                            <b>Refference ID</b>
-                            <p class="small-text">{{ user.refferenceId }}</p>
-                        </div>
-                         <div class="col-md-2 padding">
-                            <b>Account Number</b>
-                            <p class="small-text">{{ user.accountNumber }}</p>
-                        </div>
-                        <div class="col-md-2 padding">
-                            <b>Address</b>
-                            <p class="small-text">{{ user.address }}</p>
-                        </div>
-                        <div class="col-md-2 padding">
-                            <b>Cell Phone</b>
-                            <p class="small-text">{{ user.cellPhone }}</p>
-                        </div>
-                        <div class="col-md-2 padding">
-                            <b>Email</b>
-                            <p class="small-text">{{ user.email }}</p>
-                        </div>
-                        
-                    </div>
-                    
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="input-group">
+                    <label style="margin-bottom: 0px;">To Date</label>
+                    <input class="underline" [(ngModel)]="model1" placeholder="dd-mm-yyyy" name="dp" ngbDatepicker #toDate="ngbDatepicker" required="required">
+                    <div class="input-group-append">
+                        <button class="calendar-btn" (click)="toDate.toggle()" type="button">
+                                        <img src="../assets/img/calendar-icon.jpg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                                    </button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4 text-center">
+                <button class="btn btn-primary" style="margin-top: 15px; width: 200px;" [disabled]="loading" (click)="filterOrders()" type="button"
+                    *ngIf="!loading">Search</button>
+                    <button class="btn btn-primary" style="margin-top: 15px; width: 200px;" [disabled]="loading" (click)="filterOrders()" type="button"
+                        *ngIf="loading">
+                        Loading...
+                        <div class="text-center">
+                            <div class="loader"></div>
+                        </div>
+                        </button>
+            </div>
+
+        </form>
+    </div>
+    
+        <div style="margin-left: -5px !important;margin-right: -850px;;margin-top: 20px;">
+           
+             <div class="col-md-8 calendar-col text-center">
+            <div class="panel panel-primary">
+                 <button class="btn btn-primary" style="margin-top: 15px; width: 200px;height: 45px;float: left;margin-left: 20px;" (click)="navigate('#/userDetails', null)"
+        type="button">
+        <i class="fa fa-plus-circle fa-icon" style="    margin-top: -4px;font-size: 2em !important;padding-top: 5px; margin-left: -100px;"></i>
+        <p style="margin-right: -35px; margin-top: -28px;">Add New User</p>
+        </button>
+        <br><br>
+                <div class="panel-body">
+            <table class="table table-striped table-scroll">
+            <thead>
+                <tr class="pendingApprovel-header">
+                    <th style="text-align: start; width: 60px;"></th>
+                    <th>Display Name</th>
+                    <th>ID Number/ Passboard</th>
+                    <th>Refference No</th>
+                    <th>Account Number</th>
+                    <th>Address</th>
+                    <th>Cell Phone</th>
+                    <th>Email Address</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let user of users' style="font-size: 12px;">
+                    <td style="text-align: start; width: 60px;"> <div class="photo-container text-center">
+                    <img [src]="user.profileImgUrl" class="img-circle" [ngClass]="{'dash-profile-inActive':!user.isActive, 'dash-profile-active': user.isActive}" >
+                </div></td>
+                    <td style="text-align: start;" class="text-overflow"><label data-toggle="tooltip" data-placement="top" title="{{ user.name }} {{ user.surname }}">{{ user.name }} {{ user.surname }}</label> <br> {{ user.userType }}</td>
+                    <td style="text-align: start;">{{ user.IDNumber }}</td>
+                    <td style="text-align: start;">{{ user.refferenceId }}</td>
+                    <td style="text-align: start;">{{ user.accountNumber }}</td>
+                    <td style="text-align: start;" class="text-overflow"><label data-toggle="tooltip" data-placement="top" title="{{user.address}}">{{user.address}}</label></td>                    
+                    <td style="text-align: start;">{{ user.cellPhone }}</td>
+                    <td style="text-align: start;" class="text-overflow"><label data-toggle="tooltip" data-placement="top" title="{{user.email}}">{{ user.email }}</label></td>
+                    <td style="text-align: center;">
+                        <span style="text-decoration: underline;color: #32995f;cursor: pointer" (click)="viewMyPeople(user)">My People</span>
+                        <i class="fa fa-eye" style="float: right;font-size: 20px;margin-right: 25px;cursor: pointer" (click)="editUser(user)"></i>
+                    </td>
+                </tr>
+                <tr *ngIf='users.length == 0'>
+                    <td colspan="9" style="text-align: center;font-weight: bold;" *ngIf="!loading">No User(s) Found</td>
+                    <td colspan="9" style="text-align: center;font-weight: bold;">
+                        <div class="text-center">
+                            <div class="actionbar-loader"></div>
+                            <br>
+                            <span>Loading User(s)...</span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         </div>
- </div>
- </div>
+         </div>
+          </div>
+           </div>
+</div>

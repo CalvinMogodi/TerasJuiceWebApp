@@ -37,7 +37,7 @@
             </form>
         </div>
         <br><br>
-        <div class="row" style="margin-right: -20% !important; margin-left: -5px !important;height: 300px" *ngIf="!loading">
+        <div class="row" style="margin-right: -20% !important; margin-left: -5px !important;height: 300px">
             <div class="col-md-6">
                         <span class="pendingApprovel-barge">{{pendingPaymentOrders.length}}</span>
                         <span class="pendingApprovel-bargeHeader">Pending Approvel</span>
@@ -60,7 +60,13 @@
                                     <td>{{order.paymentMethod}}</td>
                                 </tr>
                                 <tr *ngIf='pendingPaymentOrders.length == 0'>
-                                    <td style="text-align: center;font-weight: bold;">No Data found</td>                                    
+                                    <td style="text-align: center;" *ngIf="!loading">No Pending Approvel Order(s)</td>     
+                                       <td style="text-align: center;font-weight: bold;" *ngIf="loading">
+                                        <div class="text-center">
+                                        <div class="order-loader" ></div> 
+                                        <span>Loading Order(s)...</span>
+                                    </div>   
+                                    </td>                                 
                                 </tr>
                             </tbody>
                         </table>
@@ -89,14 +95,20 @@
                                     <td>{{order.paymentMethod}}</td>
                                 </tr>
                                  <tr *ngIf='awaitingApprovalOrders.length == 0'>
-                                    <td style="text-align: center;font-weight: bold;">No Data found</td>                                    
+                                    <td style="text-align: center" *ngIf="!loading">No Awaiting Approvel Order(s)</td>     
+                                       <td style="text-align: center;font-weight: bold;" *ngIf="loading">
+                                        <div class="text-center">
+                                        <div class="order-loader" ></div> 
+                                        <span>Loading Order(s)...</span>
+                                    </div>   
+                                    </td>                                      
                                 </tr>
                             </tbody>
                         </table>
             </div>
         </div>
 
-        <div class="row" style="margin-right: -20% !important; margin-left: -5px !important;height: 300px" *ngIf="!loading">
+        <div class="row" style="margin-right: -20% !important; margin-left: -5px !important;height: 300px">
             <div class="col-md-6">
                         <span class="awaitingApproval-barge">{{awaitingFinalApprovalOrders.length}}</span>
                         <span class="awaitingApproval-bargeHeader">Awaiting Final Approval</span>
@@ -119,7 +131,13 @@
                                     <td>{{order.paymentMethod}}</td>
                                 </tr>
                                  <tr *ngIf='awaitingFinalApprovalOrders.length == 0'>
-                                    <td style="text-align: center;font-weight: bold;">No Data found</td>                                    
+                                    <td style="text-align: center;" *ngIf="!loading">No Awaiting Final Approvel Order(s)</td>     
+                                       <td style="text-align: center;font-weight: bold;" *ngIf="loading">
+                                        <div class="text-center">
+                                        <div class="order-loader" ></div> 
+                                        <span>Loading Order(s)...</span>
+                                    </div>   
+                                    </td>                                     
                                 </tr>
                             </tbody>
                         </table>
@@ -146,7 +164,13 @@
                                     <td>{{order.paymentMethod}}</td>
                                 </tr>
                                 <tr *ngIf='approvedOrders.length == 0'>
-                                    <td style="text-align: center;font-weight: bold;">No Data found</td>                                    
+                                     <td style="text-align: center;" *ngIf="!loading">No Approved Order(s)</td>     
+                                       <td style="text-align: center;font-weight: bold;" *ngIf="loading">
+                                        <div class="text-center">
+                                        <div class="order-loader" ></div> 
+                                        <span>Loading Order(s)...</span>
+                                    </div>   
+                                    </td>                                    
                                 </tr>
                             </tbody>
                         </table>

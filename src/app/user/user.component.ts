@@ -43,9 +43,14 @@ export class UserComponent implements OnInit {
         });
     }
 
-    navigate(url, user) {
+    editUser(user) {
         this.commonService.assginUser(user);
         this.router.navigate(['userDetails']);
+    }
+
+     viewMyPeople(user) {
+        this.commonService.assginUser(user);
+        this.router.navigate(['userPeople']);
     }
 
 }

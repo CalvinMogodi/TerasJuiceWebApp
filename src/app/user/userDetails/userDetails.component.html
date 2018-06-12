@@ -1,13 +1,6 @@
 <app-nav [heading]="heading" [headingIcon]="headingIcon"></app-nav>   
 <div class="container">
-    <div class="page-title clearfix ng-isolate-scope" pagename="Form Components" subtitle="Bootstrap UI Elements">
-        <div class="pull-left">
-            <h3 class="ng-binding" *ngIf="!isEdit">Create New User</h3> <small *ngIf="!isEdit" class="subtitle ng-binding">Please note: this will add the user as employee.</small>
-            <h3 class="ng-binding" *ngIf="isEdit">Edit User</h3> <small *ngIf="isEdit" class="subtitle ng-binding">Only employee's details can be edited.</small>
-        </div>
-    </div>
-    <br>
-    <div class="panel panel-primary" style="margin-left: 15px;">
+    <div class="panel panel-primary" style="margin-left: 15px;margin-top: 25px;">
         <form [formGroup]="userForm">
             <div class="row">
                 <div class="text-center" [ngClass]="{'col-md-12':!isUser, 'col-md-6': isUser}">

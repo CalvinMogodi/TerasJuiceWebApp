@@ -9,6 +9,16 @@
     animation: spin 2s linear infinite;
 }
 
+.order-loader {
+    margin-left: 48%;
+       border-bottom: 2px solid;
+    border-top: 3px solid yellow;
+    border-radius: 50%;
+   width: 25px;
+    height: 25px;
+    animation: spin 2s linear infinite;
+}
+
 .page{
        width: auto !important;
     padding-top: 2% !important;
