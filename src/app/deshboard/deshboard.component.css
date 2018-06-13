@@ -65,5 +65,12 @@
     color: #999;
     padding-left: 25px;
 }
+.row{
+    margin-right: -250px !important;
+}
+
+canvas{
+    background-color: white !important;
+}
 
 
