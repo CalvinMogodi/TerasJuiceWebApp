@@ -11,10 +11,20 @@
 .panel {
     margin-bottom: 20px;
     background-color: #fff;
-    padding: 25px;
     border: 0;
     border-radius: 5px;
     box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+.table-scroll tbody {
+    display:block;
+    max-height: 450px;
+    overflow-y:scroll;
+}
+.table-scroll thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
 }
 
 .awaitingApproval-barge{
@@ -91,6 +101,10 @@
         margin-top: 20px;
 }
 
+.img-circle {
+    border: 2px solid #fff;
+}
+
 .panel.panel-primary>.panel-heading {
     color: #fff;
     background-color: #06c5ac;
@@ -123,4 +137,31 @@
     color: #fff;
     background-color: #cf595b;
     border-color: #cf595b;
+}
+
+.text-overflow{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dropdown-toggle::after {
+    float: right !important;
+    margin-top: 15px !important;
+}
+
+.photo-container .dash-profile-inActive {
+    width: 50px;
+    border-color: red;
+    border-width: 3px;
+    margin-top: 9%;
+    height: 50px;
+}
+
+.photo-container .dash-profile-active {
+    width: 50px;
+    border-color: green;
+    border-width: 3px;
+    margin-top: -8%;
+    height: 50px;
 }

@@ -38,7 +38,7 @@
                                             <i class="fa fa-home"></i>
                                             <p >Reports <i class="fa fa-angle-down pull-right" style="padding-right: 15px;    margin-left: -1.5em;"></i></p>
                                         </span>
-                                         <ul class="collapse" id="collapseReport">
+                                         <ul class="collapse" id="collapseReport" style="    font-size: smaller;">
                                             <li (click)="navigate('/orderReport'); activeMenu = 5" class="text-center" [ngClass]="{'active-menu': activeMenu == 5, 'menu-text': activeMenu != 5}"><i class="fa fa-file-text-o"></i> <p>Orders Report</p></li>
                                             <li (click)="navigate('/userReport'); activeMenu = 6" class="text-center" [ngClass]="{'active-menu': activeMenu == 6, 'menu-text': activeMenu != 6}"><i class="fa fa-address-card"></i> <p>User Report</p></li>
                                             <li (click)="navigate('/executiveReport'); activeMenu = 7" class="text-center" [ngClass]="{'active-menu': activeMenu == 7, 'menu-text': activeMenu != 7}"><i class="fa fa-stack-exchange"></i> <p>Executive Report</p></li>

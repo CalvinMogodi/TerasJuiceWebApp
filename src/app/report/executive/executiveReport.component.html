@@ -1,22 +1,16 @@
 <app-nav [heading]="heading" [headingIcon]="headingIcon"></app-nav>   
 <div class="container page">
-    <div class="col-md-12 content">        
-              <div>
-  <div style="display: block">
-    <canvas baseChart
-            [datasets]="barChartData"
-            [labels]="barChartLabels"
-            [options]="barChartOptions"
-            [legend]="barChartLegend"
-            [chartType]="barChartType"
-            (chartHover)="chartHovered($event)"
-            (chartClick)="chartClicked($event)"></canvas>
-  </div>
-  <div class="btn-group">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Select Year
+    <div class="col-md-12 content">     
+      <ul id="tabsJustified" class="nav nav-tabs" style="margin-right: -200px !important;">
+                <li class="nav-item"><a href="" data-target="#profile1" data-toggle="tab" class="nav-link small text-uppercase active">Orders</a></li>
+            </ul>   
+              <div id="tabsJustifiedContent" class="tab-content panel">
+  <div style="display: block" id="profile1" class="tab-pane fade active show">
+    <div class="btn-group">
+  <button type="button" class="btn btn-secondary dropdown-toggle underline" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span style="float: left">Select Year</span>
   </button>
-  <div class="dropdown-menu">
+  <div class="dropdown-menu" style="width: 300px">
     <span class="dropdown-item" (click)="selectYear(2018)">2018</span>
     <span class="dropdown-item" (click)="selectYear(2019)">2019</span>
     <span class="dropdown-item" (click)="selectYear(2020)">2020</span>
@@ -33,6 +27,16 @@
     <span class="dropdown-item" (click)="selectYear(2030)">2030</span>
   </div>
 </div>
+    <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+  </div>
+  
 </div>
     </div>
 </div>

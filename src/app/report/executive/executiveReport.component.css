@@ -8,3 +8,50 @@
     height: 55px;
     animation: spin 2s linear infinite;
 }
+
+.panel {
+    margin-right: -230px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    padding: 25px;
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+.login-btn{
+        width: 200px;
+}
+
+.dropdown-toggle::after {
+    float: right !important;
+    margin-top: 15px !important;
+}
+
+.underline {
+      background: none !important;
+    background-image: none;
+    border: 1px solid orange;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0 0 0 0 !important;
+    color: #000000;
+    font-family: inherit;
+    font-size: 15px;
+    line-height: 1.2;
+    padding: 5px 4px;
+    transition-duration: 0.1s;
+    box-shadow: none !important;
+    transition: border 300ms ease-out;
+    width: 300px;
+}
+.calendar-btn{
+    border: none;
+    background-color: transparent;
+        margin-right: -100px;
+}
+canvas{
+    width: 1260px !important;
+    height: 530px !important;
+}

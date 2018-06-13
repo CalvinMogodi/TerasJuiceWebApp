@@ -40,63 +40,113 @@
 
         </form>
     </div>
-    
-        <div style="margin-left: -5px !important;margin-right: -850px;;margin-top: 20px;">
-           
-             <div class="col-md-8 calendar-col text-center">
+
+    <div style="margin-left: -5px !important;margin-right: -850px;;margin-top: 20px;">
+
+        <div class="col-md-8 calendar-col text-center">
             <div class="panel panel-primary">
-                 <button class="btn btn-primary" style="margin-top: 15px; width: 200px;height: 45px;float: left;margin-left: 20px;" (click)="navigate('#/userDetails', null)"
-        type="button">
-        <i class="fa fa-plus-circle fa-icon" style="    margin-top: -4px;font-size: 2em !important;padding-top: 5px; margin-left: -100px;"></i>
-        <p style="margin-right: -35px; margin-top: -28px;">Add New User</p>
-        </button>
-        <br><br>
-        <div class="panel-body">
-            <table class="table table-striped table-scroll">
-            <thead>
-                <tr class="pendingApprovel-header">
-                    <th style="text-align: start; width: 60px;"></th>
-                    <th>Display Name</th>
-                    <th>ID Number/ Passboard</th>
-                    <th>Refference No</th>
-                    <th>Account Number</th>
-                    <th>Address</th>
-                    <th>Cell Phone</th>
-                    <th>Email Address</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor='let user of users' style="font-size: 12px;">
-                    <td style="text-align: start; width: 60px;"> <div class="photo-container text-center">
-                    <img [src]="user.profileImgUrl" class="img-circle" [ngClass]="{'dash-profile-inActive':!user.isActive, 'dash-profile-active': user.isActive}" >
-                </div></td>
-                    <td style="text-align: start;" class="text-overflow"><label data-toggle="tooltip" data-placement="top" title="{{ user.name }} {{ user.surname }}">{{ user.name }} {{ user.surname }}</label> <br> {{ user.userType }}</td>
-                    <td style="text-align: start;">{{ user.IDNumber }}</td>
-                    <td style="text-align: start;">{{ user.refferenceId }}</td>
-                    <td style="text-align: start;">{{ user.accountNumber }}</td>
-                    <td style="text-align: start;" class="text-overflow"><label data-toggle="tooltip" data-placement="top" title="{{user.address}}">{{user.address}}</label></td>                    
-                    <td style="text-align: start;">{{ user.cellPhone }}</td>
-                    <td style="text-align: start;" class="text-overflow"><label data-toggle="tooltip" data-placement="top" title="{{user.email}}">{{ user.email }}</label></td>
-                    <td style="text-align: center;">
-                        <span style="text-decoration: underline;color: #32995f;cursor: pointer" (click)="viewMyPeople(user)">My People</span>
-                        <i class="fa fa-eye" style="float: right;font-size: 20px;margin-right: 25px;cursor: pointer" (click)="editUser(user)"></i>
-                    </td>
-                </tr>
-                <tr *ngIf='users.length == 0'>
-                    <td colspan="9" style="text-align: center;font-weight: bold;" *ngIf="!loading">No User(s) Found</td>
-                    <td colspan="9" style="text-align: center;font-weight: bold;">
-                        <div class="text-center">
-                            <div class="actionbar-loader"></div>
-                            <br>
-                            <span>Loading User(s)...</span>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                <button class="btn btn-primary" style="margin-top: 15px; width: 200px;height: 45px;float: left;margin-left: 20px;" (click)="navigate('#/userDetails', null)"
+                    type="button">
+                    <i class="fa fa-plus-circle fa-icon" style="    margin-top: -4px;font-size: 2em !important;padding-top: 5px; margin-left: -100px;"></i>
+                    <p style="margin-right: -35px; margin-top: -28px;">Add New User</p>
+                    </button>
+                    <br><br>
+                    <div class="panel-body">
+                        <table class="table table-striped table-scroll">
+                            <thead>
+                                <tr class="pendingApprovel-header">
+                                    <th style="text-align: start; width: 60px;"></th>
+                                    <th>Display Name</th>
+                                    <th>ID Number/ Passboard</th>
+                                    <th>Refference No</th>
+                                    <th>Account Number</th>
+                                    <th>Address</th>
+                                    <th>Cell Phone</th>
+                                    <th>Email Address</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor='let user of users' style="font-size: 12px;">
+                                    <td style="text-align: start; width: 60px;">
+                                        <div class="photo-container text-center">
+                                            <img [src]="user.profileImgUrl" class="img-circle" [ngClass]="{'dash-profile-inActive':!user.isActive, 'dash-profile-active': user.isActive}">
+                                        </div>
+                                    </td>
+                                    <td style="text-align: start;" class="text-overflow"><label data-toggle="tooltip" data-placement="top" title="{{ user.name }} {{ user.surname }}">{{ user.name }} {{ user.surname }}</label>                                        <br> {{ user.userType }}</td>
+                                    <td style="text-align: start;">{{ user.IDNumber }}</td>
+                                    <td style="text-align: start;">{{ user.refferenceId }}</td>
+                                    <td style="text-align: start;">{{ user.accountNumber }}</td>
+                                    <td style="text-align: start;" class="text-overflow"><label data-toggle="tooltip" data-placement="top" title="{{user.address}}">{{user.address}}</label></td>
+                                    <td style="text-align: start;">{{ user.cellPhone }}</td>
+                                    <td style="text-align: start;" class="text-overflow"><label data-toggle="tooltip" data-placement="top" title="{{user.email}}">{{ user.email }}</label></td>
+                                    <td style="text-align: center;">
+                                        <span style="text-decoration: underline;color: #32995f;cursor: pointer" (click)="viewUserPeople(user)"  data-toggle="modal"
+                                data-target="#exampleModal">My People</span>
+                                        <i class="fa fa-eye" style="float: right;font-size: 20px;margin-right: 25px;cursor: pointer" (click)="editUser(user)"></i>
+                                    </td>
+                                </tr>
+                                <tr *ngIf='users.length == 0'>
+                                    <td colspan="9" style="text-align: center;font-weight: bold;" *ngIf="!loading">No User(s) Found</td>
+                                    <td colspan="9" style="text-align: center;font-weight: bold;">
+                                        <div class="text-center">
+                                            <div class="actionbar-loader"></div>
+                                            <br>
+                                            <span>Loading User(s)...</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
         </div>
-         </div>
-          </div>
-           </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-left: 25%;width: 900px" role="document">
+        <div class="modal-content" style="width: 900px;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">User's People</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped table-scroll">
+                    <tr style="font-size: 12px;">
+                        <th style="font-weight: 600px">Display Name</th>
+                        <th>Refference No</th>
+                        <th>ID Number/ Passboard</th>
+                        <th>Address</th>
+                        <th>Cell Phone</th>
+                        <th>Email Address</th>
+                        <th>Active</th>
+                    </tr>
+                    <tr *ngFor='let user of userPeople' style="font-size: 12px;">
+                        <td style="text-align: start;" class="text-overflow"><label data-toggle="tooltip" data-placement="top" title="{{ user.name }} {{ user.surname }}">{{ user.name }} {{ user.surname }}</label></td>
+                        <td style="text-align: start;">{{ user.refferenceId }}</td>
+                        <td style="text-align: start;">{{ user.IDNumber }}</td>
+                        <td style="text-align: start;" class="text-overflow"><label data-toggle="tooltip" data-placement="top" title="{{user.address}}">{{user.address}}</label></td>
+                        <td style="text-align: start;">{{ user.cellPhone }}</td>
+                        <td style="text-align: start;" class="text-overflow"><label data-toggle="tooltip" data-placement="top" title="{{user.email}}">{{ user.email }}</label></td>
+                         <td style="text-align: center;">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1" readonly [checked]="user.isActive">
+                        </td>
+                    </tr>
+                    <tr *ngIf='userPeople.length == 0' style="font-size: 12px;">
+                        <td colspan="7" style="text-align: center;" *ngIf="!loadingUserPeople">No User(s) Found</td>
+                        <td colspan="7" style="text-align: center;font-weight: bold;" *ngIf="loadingUserPeople">
+                            <div class="text-center">
+                                <div class="user-loader"></div>
+                                <span>Loading User(s)...</span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>

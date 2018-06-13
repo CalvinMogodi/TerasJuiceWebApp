@@ -12,11 +12,11 @@
     <div class="row">
         <div class="col-md-12">
             <ul id="tabsJustified" class="nav nav-tabs" style="margin-right: -200px !important;">
-                 <li class="nav-item"><a href="" data-target="#profile1" data-toggle="tab" class="nav-link small text-uppercase active">Filter Stock</a></li>
-                <li class="nav-item"><a href="" data-target="#home1" data-toggle="tab" class="nav-link small text-uppercase">Capture Stock</a></li>               
+                <li class="nav-item"><a href="" data-target="#profile1" data-toggle="tab" class="nav-link small text-uppercase active">Filter Stock</a></li>
+                <li class="nav-item"><a href="" data-target="#home1" data-toggle="tab" class="nav-link small text-uppercase">Capture Stock</a></li>
             </ul>
             <br>
-            <div>
+            <div style="margin-top: -24px;">
                 <div id="tabsJustifiedContent" class="tab-content">
                     <div id="home1" class="tab-pane fade actionBar">
                         <form [formGroup]="stockForm" class="row">
@@ -70,8 +70,7 @@
                             <div class="col-md-4 text-center">
                                 <button class="btn login-btn btn-primary" style="margin-top: 15px;" [disabled]="loading" (click)="filterStock()" type="button"
                                     *ngIf="!loading">Search</button>
-                                    <button class="btn login-btn btn-primary" style="margin-top: 15px;" [disabled]="loading" type="button"
-                                        *ngIf="loading">
+                                    <button class="btn login-btn btn-primary" style="margin-top: 15px;" [disabled]="loading" type="button" *ngIf="loading">
                                         Loading...
                                         <div class="text-center">
                                             <div class="actionbar-loader"></div>
@@ -99,38 +98,38 @@
                         </div>
                     </div>
                     <br>
-                     <table class="table table-striped table-scroll">
-                            <thead>
-                                <tr class="pendingApprovel-header">
-                                    <th>Date Captured</th>
-                                    <th>New</th>
-                                    <th>Rejected</th>
-                                    <th>Reject Comment</th>
-                                    <th>User</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor='let juice of juices' style="font-size: 12px;">
-                                    <td style="text-align: start;">{{juice.dataCuptured}}</td>
-                                    <td style="text-align: start;">{{juice.newStock}}</td>
-                                    <td style="text-align: start;">{{juice.rejected}}</td>
-                                    <td style="text-align: start;" class="text-overflow">{{juice.rejectComment}}</td>
-                                    <td style="text-align: start;">{{juice.user}}</td>
-                                    <td style="text-align: start;"></td>
-                                </tr>
-                                <tr *ngIf='juices.length == 0'>
-                                    <td style="text-align: center;font-weight: bold;" *ngIf="!loading">No Stock found</td> 
-                                    <td style="text-align: center;font-weight: bold;" *ngIf="loading">
-                                        <div class="text-center" *ngIf="loading">
-                                        <div class="loader" ></div>    
+                    <table class="table table-striped table-scroll">
+                        <thead>
+                            <tr class="pendingApprovel-header">
+                                <th>Date Captured</th>
+                                <th>New</th>
+                                <th>Rejected</th>
+                                <th>Reject Comment</th>
+                                <th>User</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor='let juice of juices' style="font-size: 12px;">
+                                <td style="text-align: start;">{{juice.dataCuptured}}</td>
+                                <td style="text-align: start;">{{juice.newStock}}</td>
+                                <td style="text-align: start;">{{juice.rejected}}</td>
+                                <td style="text-align: start;" class="text-overflow">{{juice.rejectComment}}</td>
+                                <td style="text-align: start;">{{juice.user}}</td>
+                                <td style="text-align: start;"></td>
+                            </tr>
+                            <tr *ngIf='juices.length == 0'>
+                                <td style="text-align: center;font-weight: bold;" *ngIf="!loading">No Stock found</td>
+                                <td style="text-align: center;font-weight: bold;" *ngIf="loading">
+                                    <div class="text-center" *ngIf="loading">
+                                        <div class="loader"></div>
                                         <br>
                                         <span>Loading Stock...</span>
-                                    </div>   
-                                    </td>                                     
-                                </tr>
-                            </tbody>
-                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

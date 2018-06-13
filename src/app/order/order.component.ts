@@ -64,6 +64,10 @@ export class OrderComponent implements OnInit {
         });
     }
 
+    trackByIndex(index) {
+        return index;
+    }
+
     approveOrder(order) {
 
 

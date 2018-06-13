@@ -16,7 +16,9 @@ import 'rxjs/add/operator/map';
 })
 export class UserComponent implements OnInit {
     loading: boolean = true;
+    loadingUserPeople: boolean = false;
     users = [];
+    userPeople = [];
     heading: string = 'User';
     headingIcon: string = 'fa fa-users fa-icon';
 
@@ -48,9 +50,19 @@ export class UserComponent implements OnInit {
         this.router.navigate(['userDetails']);
     }
 
-     viewMyPeople(user) {
-        this.commonService.assginUser(user);
-        this.router.navigate(['userPeople']);
+    viewUserPeople(user){
+        if (user != null) {
+            this.loadingUserPeople = true;
+            let usersRef = firebase.database().ref('users');
+            usersRef.orderByChild('referredBy').equalTo(user.key).once('value', (snapshot) => {
+                this.userPeople = [];
+                    snapshot.forEach(snap => {
+                        this.userPeople.push(snap.val());
+                    }); 
+                    this.loadingUserPeople = false;                
+            });
+        }
+        this.loadingUserPeople = false;
     }
 
 }
