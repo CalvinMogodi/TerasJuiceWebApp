@@ -73,4 +73,16 @@ canvas{
     background-color: white !important;
 }
 
+.loader {
+   margin-top: 5%;
+    margin-left: 10%;
+    border-bottom: 4px solid;
+    border-top: 3px solid yellow;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
 

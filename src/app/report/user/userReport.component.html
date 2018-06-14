@@ -92,7 +92,7 @@
                         <td style="text-align: start;">{{ user.cellPhone }}</td>
                         <td style="text-align: start;" class="text-overflow"><label data-toggle="tooltip" data-placement="top" title="{{user.email}}">{{ user.email }}</label></td>
                         <td style="text-align: center;">
-                            <span style="text-decoration: underline;color: #32995f;cursor: pointer" (click)="viewUserPeople(user)" data-toggle="modal"
+                            <span *ngIf="user.userType == 'User'" style="text-decoration: underline;color: #32995f;cursor: pointer" (click)="viewUserPeople(user)" data-toggle="modal"
                                 data-target="#exampleModal">My People</span>
                                 <i class="fa fa-eye" style="float: right;font-size: 20px;margin-right: 25px;cursor: pointer" (click)="editUser(user)"></i>
                         </td>

@@ -30,8 +30,13 @@ export class ExecutiveReportComponent implements OnInit {
         
     }
     ngOnInit() {
-        var year = new Date().getFullYear();
-        this.filter('1-1-'+year, '31-12-'+year);
+        var user = JSON.parse(sessionStorage.getItem('currentUser'));
+        if(user.userType != 'Admin'){
+            this.router.navigate(['dashboard']);
+        }else{
+            var year = new Date().getFullYear();
+            this.filter('1-1-'+year, '31-12-'+year);
+        }        
     }
     
     // events
