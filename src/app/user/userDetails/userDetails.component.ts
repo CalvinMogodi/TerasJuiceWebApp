@@ -21,12 +21,17 @@ export class UserDetailsComponent implements OnInit {
     profileImage: any;
     public user: any;
     userForm: FormGroup;
+    currentUser: any;
     constructor(public userService: UserserviceProvider, public router: Router, public commonService: CommonService, public formBuilder: FormBuilder) {
         
 
     }
 
     ngOnInit() {
+        this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+        if(this.currentUser.userType == 'User'){
+            this.router.navigate(['dashboard']);
+        }else{
         this.user = this.commonService.getUser();
         if (this.user == null) {
             this.heading = 'Add New User';
@@ -41,8 +46,14 @@ export class UserDetailsComponent implements OnInit {
                 userType: 'Employee',
                 cellPhone: '',
                 password:'usermustchange',
-                changePassword: true,
-                profileImgUrl: 'assets/img/profile.png'
+                profileImgUrl: 'assets/img/profile.png',
+                points: 0,
+                displayName: '',
+                uploadedIDNumberPassport: false,
+                uploadedProfileImage: false,
+                uploadedPOP: false,
+                createdDate: 0,
+                changedPassword: false
             }
         }
         else {
@@ -63,6 +74,7 @@ export class UserDetailsComponent implements OnInit {
             cellPhone: [this.user.cellPhone, Validators.compose([Validators.required])],
             userType:[this.user.userType, Validators.compose([Validators.required])],
         });
+        }
     }
 
     back(){

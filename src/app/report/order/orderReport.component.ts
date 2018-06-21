@@ -16,14 +16,14 @@ export class OrderReportComponent implements OnInit {
     loading: boolean = true;
     model: NgbDateStruct;
     model1: NgbDateStruct;
-  date: {year: number, month: number};
+    date: {year: number, month: number};
     fromDate;
     pendingPaymentOrders = [];
     awaitingApprovalOrders = [];
     awaitingFinalApprovalOrders = [];
     approvedOrders = [];
     searchForm: FormGroup;
-   
+    currentUser: any;
     constructor(public router: Router, public formBuilder: FormBuilder, config: NgbDatepickerConfig) {
         var month = new Date().getMonth() + 1;
         var year = new Date().getFullYear();
@@ -34,8 +34,13 @@ export class OrderReportComponent implements OnInit {
         this.filter(day + '-' + month + '-' + year, day + '-' + month + '-' + year);
     }
     ngOnInit() {        
+        this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+        if(this.currentUser.userType == 'User'){
+            this.router.navigate(['dashboard']);
+        }else{
         this.model = {year: new Date().getFullYear(), month: new Date().getMonth() + 1, day: new Date().getDate()};
         this.model1 = {year: new Date().getFullYear(), month: new Date().getMonth() + 1, day: new Date().getDate()};
+        }
     }
 
     filterOrders() {

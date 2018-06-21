@@ -95,6 +95,7 @@ export class LoginComponent implements OnInit {
           if(user != null){
           user.key = authData.uid;
           scope.userId = user.key;
+          this.userId = user.key;
           let starsRef = firebase.storage().ref().child('profileImages/' + authData.user.uid);
           starsRef.getDownloadURL().then(url => {
             user.profileImgUrl = url;

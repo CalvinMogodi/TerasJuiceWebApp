@@ -10,13 +10,14 @@ export class SidebarComponent implements OnInit {
   displayName: string = '';
   activeMenu: Number = 0;
   profileImgUrl: string = '';
+  currentUser: any;
   constructor( public router: Router) { }
 
   ngOnInit() {
     var sdf = 0;
-     var currentUser = JSON.parse(sessionStorage.getItem('currentUser')); 
-     this.displayName = currentUser.name + ' ' + currentUser.surname;    
-     this.profileImgUrl = currentUser.profileImgUrl;   
+     this.currentUser = JSON.parse(sessionStorage.getItem('currentUser')); 
+     this.displayName = this.currentUser.name + ' ' + this.currentUser.surname;    
+     this.profileImgUrl = this.currentUser.profileImgUrl;   
   }
 
   navigate(url){

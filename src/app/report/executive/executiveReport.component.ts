@@ -88,7 +88,7 @@ filter(fromDate, toDate){
                 clone[1].data = this.moneyData;
                 this.barChartData = clone;
     this.loading = true;
-    let priceRef = firebase.database().ref('juicePrice');
+    let priceRef = firebase.database().ref('staticData/juicePrice');
         priceRef.orderByValue().on("value", juicePrice => {
             let price = juicePrice.val();
             let usersRef = firebase.database().ref('orders');

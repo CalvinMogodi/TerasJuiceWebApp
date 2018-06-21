@@ -14,10 +14,15 @@ export class UserReportComponent implements OnInit {
     loading: boolean = true;
     users = [];
     userPeople = [];
+    currentUser: any;
     constructor(public router: Router) {      
 
     }
     ngOnInit() {
+        this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+        if(this.currentUser.userType == 'User'){
+            this.router.navigate(['dashboard']);
+        }else{
          let usersRef = firebase.database().ref('users');
         let storageRef = firebase.storage().ref();
         usersRef.orderByChild('userType').equalTo('User').on("value", snapshot => {            
@@ -35,6 +40,7 @@ export class UserReportComponent implements OnInit {
             });                
             this.loading = false;
         });
+        }
     }
 
     viewUserPeople(user){

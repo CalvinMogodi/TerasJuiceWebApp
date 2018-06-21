@@ -37,7 +37,7 @@ export class DeshboardComponent implements OnInit {
       'green' // color for data at index 2
     ]
   };
-  
+  currentUser: any;
   ordersareloaded = false;
   loading = false;
   loadingUsers = false;
@@ -59,17 +59,23 @@ export class DeshboardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    var month = new Date().getMonth() + 1;
-    var year = new Date().getFullYear();
-    var lastDay = new Date(year, month, 0).getDate();
-    var day = new Date(year, month + 1, 0).getDay(); 
-    var fromStrDate =  month+'-' + '1-'+ year;
-    var toStrDate = month +'-' + lastDay +'-'+ year;
-    var fromDate = new Date(fromStrDate);
-    var toDate = new Date(toStrDate);
-    this.getStock(this.toTimestamp(fromDate), this.toTimestamp(toDate));
-    this.getUsers(this.toTimestamp(fromDate), this.toTimestamp(toDate));
-    this.getOrders(this.toTimestamp(fromDate), this.toTimestamp(toDate));
+    this.currentUser = JSON.parse(sessionStorage.getItem('currentUser')); 
+    if(this.currentUser.userType == 'User'){
+
+    }else{
+      var month = new Date().getMonth() + 1;
+      var year = new Date().getFullYear();
+      var lastDay = new Date(year, month, 0).getDate();
+      var day = new Date(year, month + 1, 0).getDay(); 
+      var fromStrDate =  month+'-' + '1-'+ year;
+      var toStrDate = month +'-' + lastDay +'-'+ year;
+      var fromDate = new Date(fromStrDate);
+      var toDate = new Date(toStrDate);
+      this.getStock(this.toTimestamp(fromDate), this.toTimestamp(toDate));
+      this.getUsers(this.toTimestamp(fromDate), this.toTimestamp(toDate));
+      this.getOrders(this.toTimestamp(fromDate), this.toTimestamp(toDate));
+    }
+    
   }
 
   toTimestamp(strDate){

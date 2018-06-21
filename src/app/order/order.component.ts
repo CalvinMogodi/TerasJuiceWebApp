@@ -24,6 +24,9 @@ export class OrderComponent implements OnInit {
     }
     ngOnInit() {
         this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+        if(this.currentUser.userType == 'User'){
+            this.router.navigate(['dashboard']);
+        }else{
         let priceRef = firebase.database().ref('juicePrice');
         priceRef.orderByValue().on("value", juicePrice => {
             let price = juicePrice.val();
@@ -62,6 +65,7 @@ export class OrderComponent implements OnInit {
             });
             }             
         });
+    }
     }
 
     trackByIndex(index) {

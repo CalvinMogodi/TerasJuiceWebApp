@@ -27,6 +27,7 @@ export class StockComponent implements OnInit {
     model1: NgbDateStruct;
     searchForm: FormGroup;
     date: {year: number, month: number};
+    currentUser: any;
     public notification = {
         meaagse: '',
         isSuccessful: false
@@ -45,6 +46,10 @@ export class StockComponent implements OnInit {
     });
     }
     ngOnInit() {
+        this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+        if(this.currentUser.userType == 'User'){
+            this.router.navigate(['dashboard']);
+        }else{
         var month = new Date().getMonth() + 1;
         var year = new Date().getFullYear();
         var lastDay = new Date(year, month, 0).getDate();
@@ -55,7 +60,8 @@ export class StockComponent implements OnInit {
          var todate = new Date().toString();
       this.model = {year: year, month: month, day: 1};
       this.model1 = {year: year, month: month, day: lastDay};
-      this.filter(this.toTimestamp(fromDate),this.toTimestamp(todate));           
+      this.filter(this.toTimestamp(fromDate),this.toTimestamp(todate)); 
+        }          
     }
 
      filterStock() {

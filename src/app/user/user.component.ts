@@ -21,10 +21,14 @@ export class UserComponent implements OnInit {
     userPeople = [];
     heading: string = 'User';
     headingIcon: string = 'fa fa-users fa-icon';
-
+    currentUser: any;
     constructor(public userService: UserserviceProvider, public router: Router, public commonService: CommonService) {  
     }
     ngOnInit() {
+        this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+        if(this.currentUser.userType == 'User'){
+            this.router.navigate(['dashboard']);
+        }else{
         let usersRef = firebase.database().ref('users');
         let storageRef = firebase.storage().ref();
         usersRef.orderByValue().on("value", snapshot => {
@@ -43,6 +47,7 @@ export class UserComponent implements OnInit {
                 
             this.loading = false;
         });
+        }
     }
 
     editUser(user) {

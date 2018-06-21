@@ -1,6 +1,9 @@
 <app-nav [heading]="heading" [headingIcon]="headingIcon"></app-nav>   
 <div class="container page">
-  <div class="row">
+  <div *ngIf="currentUser.userType == 'User'" class="row">
+    <h3>Under Constraction</h3>
+  </div>
+  <div *ngIf="currentUser.userType != 'User'" class="row">
     <div class="col-md-3 padding">
     <div class="stat panel ng-isolate-scope" bgclass="info" icon="eye" value="71,842" text="Profile Views">
         <div class="row">
@@ -50,7 +53,7 @@
       </div>
     </div>
   </div>
-  <div class="row" style="background-color: white;margin-right: -220px !important; margin-left: 2px; color: #999;">
+  <div *ngIf="currentUser.userType != 'User'" class="row" style="background-color: white;margin-right: -220px !important; margin-left: 2px; color: #999;">
     <div class="col-md-7 padding text-center">
         <h4 class="ng-binding">Current Month Order(s) Data</h4>
        <canvas baseChart
