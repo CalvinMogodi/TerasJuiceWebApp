@@ -24,52 +24,63 @@ export class OrderComponent implements OnInit {
     }
     ngOnInit() {
         this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-        if(this.currentUser.userType == 'User'){
+        if (this.currentUser.userType == 'User') {
             this.router.navigate(['dashboard']);
-        }else{
-        let priceRef = firebase.database().ref('juicePrice');
-        priceRef.orderByValue().on("value", juicePrice => {
-            let price = juicePrice.val();
-            let orderRef = firebase.database().ref('orders');
+        } else {
+            let priceRef = firebase.database().ref('staticData/saPrice');
+            priceRef.orderByValue().on("value", juicePrice => {
+                let price = juicePrice.val();
+                let orderRef = firebase.database().ref('orders');
 
-            orderRef.orderByChild("status").equalTo("Awaiting Approval").on("value", snapshot => {
-                this.awaitingApprovalOrders = [];
-                snapshot.forEach(order => {
-                    var thisOrder = order.val();
-                    if(thisOrder.status != 'Approved'){
-                        thisOrder.cost = price * thisOrder.quantity;
-                        thisOrder.key = order.key;
-                        if (thisOrder.uploadedPOP) {
+                orderRef.orderByChild("status").equalTo("Awaiting Approval").on("value", snapshot => {
+                    this.awaitingApprovalOrders = [];
+                    snapshot.forEach(order => {
+                        var thisOrder = order.val();
+                        if (thisOrder.status != 'Approved') {
+                            thisOrder.cost = price * thisOrder.quantity;
+                            thisOrder.key = order.key;
+                            thisOrder.dateDisplay = this.timeConverter(thisOrder.createdDate);
+                            this.awaitingApprovalOrders.push(thisOrder);
                         }
-                        this.awaitingApprovalOrders.push(thisOrder);
-                    }     
-                    return false;
+                        return false;
+                    });
+                    this.loading = false;
                 });
-                this.loading = false;
+                if (this.currentUser.userType == 'Manager' || this.currentUser.userType == 'Admin') {
+                    orderRef.orderByChild("status").equalTo("Awaiting Final Approval").on("value", snapshot => {
+                        this.awaitingFinalApprovalOrders = [];
+                        snapshot.forEach(order => {
+                            var thisOrder = order.val();
+                            if (thisOrder.status != 'Approved') {
+                                thisOrder.cost = price * thisOrder.quantity;
+                                thisOrder.key = order.key;      
+                                thisOrder.dateDisplay = this.timeConverter(thisOrder.createdDate);                          
+                                this.awaitingFinalApprovalOrders.push(thisOrder);
+                            }
+                            return false;
+                        });
+                        this.loading = false;
+                    });
+                }
             });
-            if(this.currentUser.userType == 'Manager' || this.currentUser.userType == 'Admin'){
-                orderRef.orderByChild("status").equalTo("Awaiting Final Approval").on("value", snapshot => {
-                this.awaitingFinalApprovalOrders = [];
-                snapshot.forEach(order => {
-                    var thisOrder = order.val();
-                    if(thisOrder.status != 'Approved'){
-                        thisOrder.cost = price * thisOrder.quantity;
-                        thisOrder.key = order.key;
-                        if (thisOrder.uploadedPOP) {
-                        }
-                        this.awaitingFinalApprovalOrders.push(thisOrder);
-                    }     
-                    return false;
-                });
-                this.loading = false;
-            });
-            }             
-        });
-    }
+        }
     }
 
     trackByIndex(index) {
         return index;
+    }
+
+    timeConverter(timestamp) {
+        var a = new Date(timestamp * 1000);
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        var year = a.getFullYear();
+        var month = months[a.getMonth()];
+        var date = a.getDate();
+        var hour = a.getHours();
+        var min = a.getMinutes();
+        var sec = a.getSeconds();
+        var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
+        return time;
     }
 
     approveOrder(order) {
@@ -110,5 +121,13 @@ export class OrderComponent implements OnInit {
 
     closeNotification() {
         this.notification.meaagse = '';
+    }
+
+    openPOP(orderId) {
+        let storageRef = firebase.storage().ref();
+        var starsRef = storageRef.child('proofOfPayment/' + orderId);
+        starsRef.getDownloadURL().then(url => {
+            window.open(url);
+        });
     }
 }

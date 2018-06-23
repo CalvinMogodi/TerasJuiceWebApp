@@ -16,13 +16,13 @@ export class StockServiceProvider {
 
   updateAvaliableStock(newAmount): any {
     var updates = {};
-    updates['manufactureRecord/avaliableStock/'] = newAmount;    
+    updates['manufactureData/avaliableStock/'] = newAmount;    
     return firebase.database().ref().update(updates);   
   }
 
   updateRejectedStock(newAmount): any {
     var updates = {};
-    updates['manufactureRecord/rejectedStock/'] = newAmount;    
+    updates['manufactureData/rejectedStock/'] = newAmount;    
     return firebase.database().ref().update(updates);   
   }
 
@@ -31,7 +31,7 @@ export class StockServiceProvider {
   }
 
   getManufactureRecord(): any {
-   return firebase.database().ref('/manufactureRecord').once('value');
+   return firebase.database().ref('/manufactureData').once('value');
   }
 
 }

@@ -25,24 +25,26 @@
                             <th>User</th>
                             <th>Delivery Method</th>
                             <th>Payment Method</th>
+                            <th>Payment Reference</th>
                             <th>Proof Of Payment</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor='let order of awaitingApprovalOrders; let i = index; trackBy: trackByIndex' style="font-size: 12px;">
-                            <td style="text-align: start;"></td>
+                            <td style="text-align: start;">{{order.orderNumber}}</td>
                             <td style="text-align: start;"><b>{{order.cost | currency:'ZAR':true}} </b>&nbsp; ({{order.quantity}})</td>
-                            <td style="text-align: center;">{{order.createdDate}}</td>
+                            <td style="text-align: center;">{{order.dateDisplay}}</td>
                             <td style="text-align: center;">{{order.user}}</td>
                             <td style="text-align: center;" class="text-overflow">{{order.deliveryMethod}}</td>
                             <td style="text-align: center;">{{order.paymentMethod}}</td>
+                            <td style="text-align: center;">{{order.reference}}</td>
                             <td style="text-align: center;">
                                 <i *ngIf="!order.uploadedPOP" class="fa fa-file-pdf-o fa-icon"></i>
-                                <i *ngIf="order.uploadedPOP" style="color: red" class="fa fa-file-pdf-o fa-icon"></i>
+                                <i *ngIf="order.uploadedPOP" style="color: green" class="fa fa-file-pdf-o fa-icon" (click)="openPOP(order.key)"></i>
                             </td>
                             <td style="text-align: start;">
-                                <button type="button" [disabled]="order.uploadedPOP" (click)="approveOrder(order)" class="btn btn-success">
+                                <button type="button" [disabled]="!order.uploadedPOP" (click)="approveOrder(order)" class="btn btn-success">
                                     Approve
                                 </button>
                             </td>
@@ -74,24 +76,26 @@
                                 <th>User</th>
                                 <th>Delivery Method</th>
                                 <th>Payment Method</th>
+                                 <th>Payment Reference</th>
                                 <th>Proof Of Payment</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor='let order of awaitingFinalApprovalOrders' style="font-size: 12px;">
-                                <td style="text-align: start;"></td>
+                                <td style="text-align: start;">{{order.orderNumber}}</td>
                                 <td style="text-align: start;"><b>{{order.cost | currency:'ZAR':true}} </b>&nbsp; ({{order.quantity}})</td>
-                                <td style="text-align: center;">{{order.createdDate}}</td>
+                                <td style="text-align: center;">{{order.dateDisplay}}</td>
                                 <td style="text-align: center;">{{order.user}}</td>
                                 <td style="text-align: center;" class="text-overflow">{{order.deliveryMethod}}</td>
                                 <td style="text-align: center;">{{order.paymentMethod}}</td>
+                                 <td style="text-align: center;">{{order.reference}}</td>
                                 <td style="text-align: center;">
                                     <i *ngIf="!order.uploadedPOP" class="fa fa-file-pdf-o fa-icon"></i>
-                                    <i *ngIf="order.uploadedPOP" style="color: red" class="fa fa-file-pdf-o fa-icon"></i>
+                                    <i *ngIf="order.uploadedPOP" style="color:green" class="fa fa-file-pdf-o fa-icon"></i>
                                 </td>
                                 <td style="text-align: start;">
-                                    <button type="button" [disabled]="order.uploadedPOP" (click)="approveOrder(order)" class="btn btn-success">
+                                    <button type="button" [disabled]="!order.uploadedPOP" (click)="approveOrder(order)" class="btn btn-success">
                                     Approve
                                 </button>
                                 </td>

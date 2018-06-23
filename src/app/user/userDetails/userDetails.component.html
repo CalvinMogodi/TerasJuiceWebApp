@@ -10,7 +10,7 @@
                     <input *ngIf="!isUser" accept="image/*" class="text-center btn btn-primary" type="file" (change)="fileChangeEvent($event)" placeholder="Select Image" />
                 </div>
                 <div *ngIf="isUser" class="col-md-6 photo-container text-center icon-col striped-bg">
-                    <img *ngIf="user.uploadedPOP" [src]="user.popImgUrl" class="center-block"><br>
+                    <i (click)="openPOP()" *ngIf="user.uploadedPOP" style="color: green;font-size: 150px;margin-top: 30px;" class="fa fa-file-pdf-o fa-icon"></i>
                      <img *ngIf="!user.uploadedPOP" src="" class="img-pop pop-inActive"><br>
                     <small *ngIf="user.uploadedPOP" class="subtitle ng-binding">Proof Of Payment</small>
                     <small *ngIf="!user.uploadedPOP" class="subtitle ng-binding">User has not uploaded proof of payment yet.</small>

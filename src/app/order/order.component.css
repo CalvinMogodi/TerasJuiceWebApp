@@ -124,6 +124,10 @@ display:block;
 max-height: 230px;
 overflow-y:scroll;
 }
+
+.table-scroll thead tr th {
+font-size: 13px;
+}
 .table-scroll thead, tbody tr {
 display:table;
 width:100%;

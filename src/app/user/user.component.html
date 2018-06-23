@@ -57,12 +57,12 @@
                                 <tr class="pendingApprovel-header">
                                     <th style="text-align: start; width: 60px;"></th>
                                     <th>Display Name</th>
-                                    <th>ID Number/ Passboard</th>
-                                    <th>Refference No</th>
-                                    <th>Account Number</th>
-                                    <th>Address</th>
-                                    <th>Cell Phone</th>
+                                    <th>ID Number/ Passboard</th> 
+                                    <th>Bank/ Account Number</th>
+                                     <th>Cell Phone</th>
                                     <th>Email Address</th>
+                                    <th>Address</th>
+                                    <th>Country</th>                                   
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -74,12 +74,12 @@
                                         </div>
                                     </td>
                                     <td style="text-align: start;" class="text-overflow"><label data-toggle="tooltip" data-placement="top" title="{{ user.name }} {{ user.surname }}">{{ user.name }} {{ user.surname }}</label><br> {{ user.userType }}</td>
-                                    <td style="text-align: start;">{{ user.IDNumber }}</td>
-                                    <td style="text-align: start;">{{ user.refferenceId }}</td>
-                                    <td style="text-align: start;">{{ user.accountNumber }}</td>
-                                    <td style="text-align: start;" class="text-overflow"><label data-toggle="tooltip" data-placement="top" title="{{user.address}}">{{user.address}}</label></td>
-                                    <td style="text-align: start;">{{ user.cellPhone }}</td>
+                                    <td style="text-align: start;">{{ user.IDNumber }}</td>                                    
+                                    <td style="text-align: start;"> {{ user.bankName }} ({{ user.accountNumber }})</td>
+                                     <td style="text-align: start;">{{ user.cellPhone }}</td>
                                     <td style="text-align: start;" class="text-overflow"><label data-toggle="tooltip" data-placement="top" title="{{user.email}}">{{ user.email }}</label></td>
+                                    <td style="text-align: start;" class="text-overflow"><label data-toggle="tooltip" data-placement="top" title="{{user.address}}">{{user.address}}</label></td>
+                                    <td style="text-align: start;">{{ user.country }}</td>                                   
                                     <td style="text-align: center;">
                                         <span *ngIf="user.userType == 'User'" style="text-decoration: underline;color: #32995f;cursor: pointer" (click)="viewUserPeople(user)"  data-toggle="modal"
                                 data-target="#exampleModal">My People</span>
