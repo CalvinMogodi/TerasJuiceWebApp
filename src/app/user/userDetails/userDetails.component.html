@@ -110,6 +110,18 @@
                     </div>
                 </div>
             </div>
+            <div class="row" *ngIf="isUser"  style="padding: 0px 15px 0px 15px;">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label for="inputtext" class="col-sm-4 control-label">Payment Refferece</label>
+                        <div class="col-sm-8"> <input type="text" [readonly]="true" [value]="user.paymentReference" class="form-control underline" id="paymentReference">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    
+                </div>
+            </div>
            
             <div class="row"  style="padding: 0px 15px 0px 15px;">
                 <div class="col-md-6">

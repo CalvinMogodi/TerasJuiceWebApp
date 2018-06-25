@@ -11,11 +11,12 @@ import { OrderComponent } from './order/order.component';
 import { UserReportComponent } from './report/user/userReport.component';
 import { OrderReportComponent } from './report/order/orderReport.component';
 import { ExecutiveReportComponent } from './report/executive/executiveReport.component';
-
+import { CommissionComponent } from './commission/commission.component'
 
 const routes: Routes =[
     { path: 'dashboard', component: DeshboardComponent },       
     { path: 'user',component: UserComponent },
+    { path: 'commission',component: CommissionComponent },
     { path: 'userDetails',component: UserDetailsComponent },
     { path: 'stock',component: StockComponent },  
     { path: 'order',component: OrderComponent },     

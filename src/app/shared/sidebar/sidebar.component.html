@@ -21,6 +21,10 @@
                                             <i class="fa fa-home"></i>
                                             <p>Dashboard</p>
                                     </li>
+                                    <li *ngIf="currentUser.userType == 'Admin'" class="text-center" [ngClass]="{'active-menu': activeMenu == 1, 'menu-text': activeMenu != 1}" (click)="navigate('/commission'); activeMenu = 1">
+                                            <i class="fa fa-money"></i>
+                                            <p>Commission</p>
+                                    </li>
                                     <li *ngIf="currentUser.userType != 'User'" class="text-center" [ngClass]="{'active-menu': activeMenu == 1, 'menu-text': activeMenu != 1}" (click)="navigate('/stock'); activeMenu = 1">
                                             <i class="fa fa-product-hunt"></i>
                                             <p>Stock</p>

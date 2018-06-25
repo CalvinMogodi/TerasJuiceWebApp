@@ -26,8 +26,8 @@ import { OrderComponent } from './order/order.component';
 import { UserReportComponent } from './report/user/userReport.component';
 import { OrderReportComponent } from './report/order/orderReport.component';
 import { ExecutiveReportComponent } from './report/executive/executiveReport.component';
-
-import * as firebase from 'firebase'
+import { CommissionComponent } from './commission/commission.component'
+import * as firebase from 'firebase';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyDNZ2-urHkW0xoe9rh9aexpp__FeHybkb8",
@@ -55,6 +55,7 @@ firebase.initializeApp(firebaseConfig);
     UserReportComponent,
     OrderReportComponent,
     ExecutiveReportComponent,
+    CommissionComponent,
   ],
   imports: [
      BrowserModule,

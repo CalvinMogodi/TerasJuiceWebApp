@@ -1,0 +1,64 @@
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    padding: 25px;
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    margin-right: -220px;
+}
+
+.page{
+    padding-top: 32px;    
+}
+
+.text-center {
+    text-align: center;
+}
+
+.loader {
+    margin-left: 48%;
+    border-bottom: 2px solid;
+    border-top: 3px solid yellow;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    animation: spin 2s linear infinite;
+}
+
+.table-scroll tbody {
+    display:block;
+    max-height: 630px;
+    overflow-y:scroll;
+}
+
+.table-scroll thead tr th {
+    font-size: 13px;
+}
+.table-scroll thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+
+ .red{
+    background-color: red;
+    color: white;
+    margin-top: -45px;
+    font-family: latoregular;
+    font-size: 16px;
+    margin-left: -42px;
+    margin-right: -15px;
+    padding-left: 20px;
+}
+
+.green{
+    background-color: green;
+    color: white;
+    margin-top: -45px;
+    font-family: latoregular;
+    font-size: 16px;
+    margin-left: -42px;
+    margin-right: -15px;
+    padding-left: 20px;
+}
