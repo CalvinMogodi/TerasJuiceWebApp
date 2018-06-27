@@ -24,17 +24,17 @@ export class CommissionComponent implements OnInit {
             this.users = [];
             if (snap != null) {
                 snapshot.forEach(snap => {
-                  let user = snap.val();
-                  user.dateDisplay = this.timeConverter(user.createdDate);
-                  user.payUser = false;
-                  user.key = snap.key;
-                  let fourMonthsAgo = new Date();
-                  let date = new Date(user.dateDisplay);
-                  fourMonthsAgo.setMonth(fourMonthsAgo.getMonth() - 2);
-                  if(+fourMonthsAgo > +date)
-                    user.payUser = true;
+                  let user = snap.val();                 
                   if(user.isActive){
-                      this.users.push(user);
+                    user.dateDisplay = this.timeConverter(user.createdDate);
+                    user.payUser = false;
+                    user.key = snap.key;
+                    let fourMonthsAgo = new Date();
+                    let date = new Date(user.dateDisplay);
+                    fourMonthsAgo.setMonth(fourMonthsAgo.getMonth() - 2);
+                    if(+fourMonthsAgo > +date)
+                      user.payUser = true;
+                    this.users.push(user);
                   }                    
                 }); 
             }

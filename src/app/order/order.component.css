@@ -120,16 +120,39 @@ img {
 }
 
 .table-scroll tbody {
-display:block;
-max-height: 230px;
-overflow-y:scroll;
+    display:block;
+    max-height: 230px;
+    overflow-y:scroll;
 }
 
 .table-scroll thead tr th {
-font-size: 13px;
+    font-size: 13px;
 }
 .table-scroll thead, tbody tr {
-display:table;
-width:100%;
-table-layout:fixed;
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+
+.underline {
+      background: none !important;
+    background-image: none;
+    border: 1px solid orange;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0 0 0 0 !important;
+    color: #000000;
+    font-family: inherit;
+    font-size: 15px;
+    line-height: 1.2;
+    padding: 5px 4px;
+    transition-duration: 0.1s;
+    box-shadow: none !important;
+    transition: border 300ms ease-out;
+    width: 100% !important;
+}
+
+.login-btn{
+        width: 200px;
 }

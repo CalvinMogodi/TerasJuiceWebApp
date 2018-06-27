@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { OrderServiceProvider } from '../providers/orderservice/orderservice';
 import * as firebase from 'firebase';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 
 @Component({
     selector: 'app-order',
@@ -14,13 +15,25 @@ export class OrderComponent implements OnInit {
     loading: boolean = true;
     awaitingApprovalOrders = [];
     awaitingFinalApprovalOrders = [];
+    awaitingCourierPickupOrders = [];
     currentUser: any;
+    collectionForm: FormGroup;
+    orderToCollect: any;
     public notification = {
         meaagse: '',
         isSuccessful: false
     };
-    constructor(public router: Router, public orderService: OrderServiceProvider) {
-
+    public collection = {
+        courierName: '',
+        waybillNumber: '',
+        driverName: '',
+    };
+    constructor(public router: Router, public formBuilder: FormBuilder, public orderService: OrderServiceProvider) {
+         this.collectionForm = formBuilder.group({
+            courierName: ['', Validators.compose([Validators.required])],
+            waybillNumber: ['', Validators.compose([Validators.required])],
+            driverName: ['', Validators.compose([Validators.required])],
+        });
     }
     ngOnInit() {
         this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
@@ -41,6 +54,20 @@ export class OrderComponent implements OnInit {
                             thisOrder.key = order.key;
                             thisOrder.dateDisplay = this.timeConverter(thisOrder.createdDate);
                             this.awaitingApprovalOrders.push(thisOrder);
+                        }
+                        return false;
+                    });
+                    this.loading = false;
+                });
+                orderRef.orderByChild("status").equalTo("Awaiting Courier Pickup").on("value", snapshot => {
+                    this.awaitingCourierPickupOrders = [];
+                    snapshot.forEach(order => {
+                        var thisOrder = order.val();
+                        if (thisOrder.status != 'Approved') {
+                            thisOrder.cost = price * thisOrder.quantity;
+                            thisOrder.key = order.key;
+                            thisOrder.dateDisplay = this.timeConverter(thisOrder.createdDate);
+                            this.awaitingCourierPickupOrders.push(thisOrder);
                         }
                         return false;
                     });
@@ -85,14 +112,13 @@ export class OrderComponent implements OnInit {
 
     approveOrder(order) {
 
-
         if (order.status == 'Awaiting Approval') {
             order.status = 'Awaiting Final Approval'
             order.approvers = [{
                 user: this.currentUser.name + this.currentUser.surname,
             }]
         } else if (order.status == 'Awaiting Final Approval') {
-            order.status = 'Approved'
+            order.status = 'Awaiting Courier Pickup'
             if (order.approvers == undefined) {
                 order.approvers = [{
                     user: this.currentUser.name + this.currentUser.surname,
@@ -129,5 +155,9 @@ export class OrderComponent implements OnInit {
         starsRef.getDownloadURL().then(url => {
             window.open(url);
         });
+    }
+
+    confirmCollection(order){
+        this.orderToCollect = order;
     }
 }

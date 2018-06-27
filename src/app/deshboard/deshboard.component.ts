@@ -121,7 +121,7 @@ export class DeshboardComponent implements OnInit {
 
    getUsers(fromDate, toDate) {
          let usersRef = firebase.database().ref('users');
-        usersRef.orderByChild("timestamp").startAt(fromDate).endAt(toDate).on("value", snapshot => {   
+        usersRef.orderByChild("createdDate").startAt(fromDate).endAt(toDate).on("value", snapshot => {   
            this.userData = {
               penddingPayment: 0,
               awaitingApproval: 0,
@@ -129,21 +129,29 @@ export class DeshboardComponent implements OnInit {
             };
             snapshot.forEach(item => {
                 var user = item.val();
-                if(user.status == 'Awaiting Approval')   
-                  this.userData.awaitingApproval = Number(this.userData.awaitingApproval + this.userData.awaitingApproval) ;   
-                if(user.status == 'Approved')   
-                  this.userData.approved = Number(this.userData.approved + this.userData.approved) ; 
-                if(user.status == 'Pending Payment')   
-                  this.userData.penddingPayment = Number(this.userData.penddingPayment + this.userData.penddingPayment) ;    
+                if(user.userType == 'User'){
+                  if(!user.uploadedPOP && !user.isActive)
+                    this.userData.penddingPayment = Number(this.userData.penddingPayment + 1) ;
+
+                  if(user.uploadedPOP && !user.isActive)
+                    this.userData.awaitingApproval = Number(this.userData.awaitingApproval + 1) ;
+
+                  if(user.uploadedPOP && user.isActive)
+                     this.userData.approved = Number(this.userData.approved + 1) ; 
+                                   
                 return false;
-            });                
+                }                
+            }); 
+            this.doughnutChartData = [
+              { data: [this.userData.penddingPayment, this.userData.awaitingApproval, this.userData.approved], label: 'Number Of User' },
+            ];               
             this.loading = false;
         });
     }
 
     getOrders(fromDate, toDate) {
-         let usersRef = firebase.database().ref('orderd');
-        usersRef.orderByChild("timestamp").startAt(fromDate).endAt(toDate).on("value", snapshot => {   
+         let usersRef = firebase.database().ref('orders');
+        usersRef.orderByChild("createdDate").startAt(fromDate).endAt(toDate).on("value", snapshot => {   
            this.orderData = {
               penddingPayment: 0,
               awaitingApproval: 0,
@@ -153,15 +161,19 @@ export class DeshboardComponent implements OnInit {
             snapshot.forEach(item => {
                 var order = item.val();    
                  if(order.status == 'Awaiting Approval')   
-                  this.orderData.awaitingApproval = Number(this.orderData.awaitingApproval + this.orderData.awaitingApproval) ;   
+                  this.orderData.awaitingApproval = Number(this.orderData.awaitingApproval + 1) ;   
                 if(order.status == 'Approved')   
-                  this.orderData.approved = Number(this.orderData.approved + this.orderData.approved) ; 
+                  this.orderData.approved = Number(this.orderData.approved + 1) ; 
                 if(order.status == 'Pending Payment')   
-                  this.orderData.penddingPayment = Number(this.orderData.penddingPayment + this.orderData.penddingPayment) ; 
+                  this.orderData.penddingPayment = Number(this.orderData.penddingPayment + 1) ; 
                 if(order.status == 'Awaiting Final Approval')   
-                  this.orderData.awaitingFinalApproval = Number(this.orderData.awaitingFinalApproval + this.orderData.awaitingFinalApproval) ;         
+                  this.orderData.awaitingFinalApproval = Number(this.orderData.awaitingFinalApproval + 1) ;         
                 return false;
             });                
+
+            this.barChartData = [
+                    { data: [this.orderData.penddingPayment, this.orderData.awaitingApproval, this.orderData.awaitingFinalApproval, this.orderData.approved], label: 'Number Of Order' },
+                ];
             this.loading = false;
         });
     }
