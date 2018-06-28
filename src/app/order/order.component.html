@@ -36,12 +36,12 @@
                             <td style="text-align: start;"><b>{{order.cost | currency:'ZAR':true}} </b>&nbsp; ({{order.quantity}})</td>
                             <td style="text-align: start;">{{order.dateDisplay}}</td>
                             <td style="text-align: start;">{{order.user}}</td>
-                            <td style="text-align: start;" class="text-overflow">{{order.deliveryMethod}}</td>
-                            <td style="text-align: start;">{{order.paymentMethod}}</td>
-                            <td style="text-align: start;">{{order.reference}}</td>
+                            <td style="text-align: center;" class="text-overflow">{{order.deliveryMethod}}</td>
+                            <td style="text-align: center;">{{order.paymentMethod}}</td>
+                            <td style="text-align: center;">{{order.reference}}</td>
                             <td style="text-align: center;">
                                 <i *ngIf="!order.uploadedPOP" class="fa fa-file-pdf-o fa-icon"></i>
-                                <i *ngIf="order.uploadedPOP" style="color: green" class="fa fa-file-pdf-o fa-icon" (click)="openPOP(order.key)"></i>
+                                <i *ngIf="order.uploadedPOP" style="color: green;cursor: pointer" class="fa fa-file-pdf-o fa-icon" (click)="openPOP(order.key)"></i>
                             </td>
                             <td style="text-align: start;">
                                 <button type="button" [disabled]="!order.uploadedPOP" (click)="approveOrder(order)" class="btn btn-success">
@@ -133,12 +133,12 @@
                                     <td style="text-align: start;"><b>{{order.cost | currency:'ZAR':true}} </b>&nbsp; ({{order.quantity}})</td>
                                     <td style="text-align: start;">{{order.dateDisplay}}</td>
                                     <td style="text-align: start;">{{order.user}}</td>
-                                    <td style="text-align: start;" class="text-overflow">{{order.deliveryMethod}}</td>
-                                    <td style="text-align: start;">{{order.paymentMethod}}</td>
-                                    <td style="text-align: start;">{{order.reference}}</td>
+                                    <td style="text-align: center;" class="text-overflow">{{order.deliveryMethod}}</td>
+                                    <td style="text-align: center;">{{order.paymentMethod}}</td>
+                                    <td style="text-align: center;">{{order.reference}}</td>
                                     <td style="text-align: center;">
                                         <i *ngIf="!order.uploadedPOP" class="fa fa-file-pdf-o fa-icon"></i>
-                                        <i *ngIf="order.uploadedPOP" style="color:green" class="fa fa-file-pdf-o fa-icon" (click)="openPOP(order.key)"></i>
+                                        <i *ngIf="order.uploadedPOP" style="color:green;cursor: pointer" class="fa fa-file-pdf-o fa-icon" (click)="openPOP(order.key)"></i>
                                     </td>
                                     <td style="text-align: start;">
                                         <button type="button" [disabled]="!order.uploadedPOP" (click)="approveOrder(order)" class="btn btn-success">

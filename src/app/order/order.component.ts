@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { OrderServiceProvider } from '../providers/orderservice/orderservice';
 import * as firebase from 'firebase';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { APIService } from '../app.apiService';
 
 @Component({
     selector: 'app-order',
@@ -28,7 +29,7 @@ export class OrderComponent implements OnInit {
         waybillNumber: '',
         driverName: '',
     };
-    constructor(public router: Router, public formBuilder: FormBuilder, public orderService: OrderServiceProvider) {
+    constructor(private apiService: APIService, public router: Router, public formBuilder: FormBuilder, public orderService: OrderServiceProvider) {
          this.collectionForm = formBuilder.group({
             courierName: ['', Validators.compose([Validators.required])],
             waybillNumber: ['', Validators.compose([Validators.required])],
@@ -159,5 +160,9 @@ export class OrderComponent implements OnInit {
 
     confirmCollection(order){
         this.orderToCollect = order;
+    }
+
+    sendEmail(order){
+        this.apiService.sendEmail(order).subscribe(data =>{}) 
     }
 }

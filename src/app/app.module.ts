@@ -28,6 +28,11 @@ import { OrderReportComponent } from './report/order/orderReport.component';
 import { ExecutiveReportComponent } from './report/executive/executiveReport.component';
 import { CommissionComponent } from './commission/commission.component'
 import * as firebase from 'firebase';
+import { Http, Response, Headers, RequestOptions} from '@angular/http';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Observable} from 'rxjs/Observable';
+import { HttpModule } from '@angular/http';
+import { APIService } from './app.apiService';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyDNZ2-urHkW0xoe9rh9aexpp__FeHybkb8",
@@ -58,8 +63,9 @@ firebase.initializeApp(firebaseConfig);
     CommissionComponent,
   ],
   imports: [
-     BrowserModule,
+    BrowserModule,
     AppRoutingModule,
+    HttpModule,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
@@ -72,7 +78,8 @@ firebase.initializeApp(firebaseConfig);
     CommonService,
     OrderServiceProvider,
     StockServiceProvider,
-    {provide:LocationStrategy, useClass:HashLocationStrategy}
+    {provide:LocationStrategy, useClass:HashLocationStrategy},
+    APIService
   ],
   bootstrap: [AppComponent]
 })

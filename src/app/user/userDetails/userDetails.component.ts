@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 import { UserserviceProvider } from '../../providers/userservice/userservice';
 import { CommonService } from '../../shared/common';
 import * as firebase from 'firebase';
+import { APIService } from '../../app.apiService';
 
 @Component({
     selector: 'app-userDetails',
@@ -23,8 +24,9 @@ export class UserDetailsComponent implements OnInit {
     public user: any;
     userForm: FormGroup;
     currentUser: any;
-    constructor(public userService: UserserviceProvider, public router: Router, public commonService: CommonService, public formBuilder: FormBuilder) {
-
+    private webApiUrl: string;
+    constructor(private apiService: APIService , public userService: UserserviceProvider, public router: Router, public commonService: CommonService, public formBuilder: FormBuilder) {
+        this.webApiUrl = 'http://localhost:7777/api/';
 
     }
 
@@ -115,6 +117,7 @@ export class UserDetailsComponent implements OnInit {
     approveUser() {
         this.submitAttempt = true;
         this.showError = false;
+        this.sendSMS();
         this.userService.approveUser(this.user.key).then(userId => {
             this.back();
         }, error => {
@@ -136,4 +139,12 @@ export class UserDetailsComponent implements OnInit {
             });
         }
     }
+
+     sendSMS() {
+        var sms = {
+            number: this.user.cellPhone,
+            displayName: this.user.displayName
+        }
+        this.apiService.sendSMS(sms).subscribe(data =>{})        
+    }    
 }
