@@ -26,13 +26,12 @@ export class APIService {
     let body = JSON.stringify(order);
     let headers = new Headers({ 'Accept': 'application/json','Content-Type': 'application/x-www-form-urlencoded' });
     let options = new RequestOptions({ headers: headers });
-    return this._http.post(this.webApiUrl+'sms/userapprovedsms', body, options)
+    return this._http.post(this.webApiUrl+'sendMail', body, options)
         .map((response: Response) => <any>response)
         .catch(this.handleError);
   }
 
   private handleError(error: Response) {
-    console.error(error);
     return Observable.throw(error.json().error || 'Server error');
   }
 

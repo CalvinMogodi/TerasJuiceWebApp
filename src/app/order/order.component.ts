@@ -30,7 +30,7 @@ export class OrderComponent implements OnInit {
         driverName: '',
     };
     constructor(private apiService: APIService, public router: Router, public formBuilder: FormBuilder, public orderService: OrderServiceProvider) {
-         this.collectionForm = formBuilder.group({
+        this.collectionForm = formBuilder.group({
             courierName: ['', Validators.compose([Validators.required])],
             waybillNumber: ['', Validators.compose([Validators.required])],
             driverName: ['', Validators.compose([Validators.required])],
@@ -81,8 +81,8 @@ export class OrderComponent implements OnInit {
                             var thisOrder = order.val();
                             if (thisOrder.status != 'Approved') {
                                 thisOrder.cost = price * thisOrder.quantity;
-                                thisOrder.key = order.key;      
-                                thisOrder.dateDisplay = this.timeConverter(thisOrder.createdDate);                          
+                                thisOrder.key = order.key;
+                                thisOrder.dateDisplay = this.timeConverter(thisOrder.createdDate);
                                 this.awaitingFinalApprovalOrders.push(thisOrder);
                             }
                             return false;
@@ -111,6 +111,16 @@ export class OrderComponent implements OnInit {
         return time;
     }
 
+    dateConverter(timestamp) {
+        var a = new Date(timestamp * 1000);
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        var year = a.getFullYear();
+        var month = months[a.getMonth()];
+        var date = a.getDate();
+        var time = date + ' ' + month + ' ' + year;
+        return time;
+    }
+
     approveOrder(order) {
 
         if (order.status == 'Awaiting Approval') {
@@ -131,19 +141,21 @@ export class OrderComponent implements OnInit {
             }
 
         }
-        this.orderService.approveOrder(order).then(result => {
-            if (order.status == 'Awaiting Final Approval') {
-                this.notification.meaagse = 'Order is approved successful and waiting for final approval.';
-            } else {
-                this.notification.meaagse = 'Order is approved successful and ready for delivery.';
-                //send email to user
-            }
-            this.notification.isSuccessful = true;
-        }, error => {
-            this.notification.meaagse = 'Unable to approve order.';
-            this.notification.isSuccessful = false;
-            this.loading = false;
-        });
+
+        this.sendEmail(order);
+        /* this.orderService.approveOrder(order).then(result => {
+             if (order.status == 'Awaiting Final Approval') {
+                 this.notification.meaagse = 'Order is approved successful and waiting for final approval.';
+             } else {
+                 this.notification.meaagse = 'Order is approved successful and ready for delivery.';
+                 //send email to user
+             }
+             this.notification.isSuccessful = true;
+         }, error => {
+             this.notification.meaagse = 'Unable to approve order.';
+             this.notification.isSuccessful = false;
+             this.loading = false;
+         });*/
     }
 
     closeNotification() {
@@ -158,11 +170,27 @@ export class OrderComponent implements OnInit {
         });
     }
 
-    confirmCollection(order){
+    confirmCollection(order) {
         this.orderToCollect = order;
     }
 
-    sendEmail(order){
-        this.apiService.sendEmail(order).subscribe(data =>{}) 
+    sendEmail(order) {
+        let usersRef = firebase.database().ref('users/' + order.userId);
+        usersRef.orderByValue().once("value", snapshot => {
+            var user = snapshot.val();
+            if (user != null) {
+                let email = {
+                    quantity: order.quantity,
+                    orderNumber: order.orderNumber,
+                    displayName: user.displayName,
+                    address: user.address,
+                    invoiceDate: this.dateConverter(order.createdDate),
+                    membershipNo: user.membershipNo,
+                    cost: order.cost,
+                    invoiceNumber: order.orderNumber,
+                };
+                this.apiService.sendEmail(email).subscribe(data => { })
+            }
+        });
     }
 }
