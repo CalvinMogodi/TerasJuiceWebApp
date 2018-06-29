@@ -65,6 +65,7 @@ export class StockComponent implements OnInit {
     }
 
     filterStock() {
+        this.loading = true;
         var fromDate = new Date();
         var fromDate1 = new Date(fromDate.setDate(this.model.day));
         var fromDate2 = new Date(fromDate1.setMonth(this.model.month));
@@ -87,8 +88,8 @@ export class StockComponent implements OnInit {
     }
 
     filter(fromDate, toDate) {
-        firebase.database().ref('stock').orderByChild("timestamp").startAt(fromDate).endAt(toDate).on("value", snapshot => {
-            this.juices = [];
+        this.juices = [];
+        firebase.database().ref('stock').orderByChild("timestamp").startAt(fromDate).endAt(toDate).on("value", snapshot => {            
             this.manufactured = 0;
             this.rejected = 0;
             this.avaliableTotal = 0;
@@ -101,10 +102,9 @@ export class StockComponent implements OnInit {
                 return false;
             });
             if (this.ordersareloaded) {
-                this.avaliableTotal = this.manufactured - this.soldTotal;
-                this.loading = false;
+                this.avaliableTotal = this.manufactured - this.soldTotal;                
             }
-
+            this.loading = false;
             this.stockisloaded = true;
         });
 
@@ -113,15 +113,17 @@ export class StockComponent implements OnInit {
             this.soldTotal = 0;
             snapshot.forEach(item => {
                 var order = item.val();
-                this.soldTotal = Number(this.soldTotal + Number(order.quantity));
-                this.orders.push(order);
+                if(order.uploadedPOP){
+                    this.soldTotal = Number(this.soldTotal + Number(order.quantity));
+                    this.orders.push(order);                
+                }
                 return false;
             });
             if (this.stockisloaded) {
-                this.avaliableTotal = this.manufactured - this.soldTotal;
-                this.loading = false;
+                this.avaliableTotal = this.manufactured - this.soldTotal;                
             }
             this.ordersareloaded = true;
+            this.loading = false;
         });
     }
 

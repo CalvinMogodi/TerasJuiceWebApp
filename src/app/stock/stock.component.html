@@ -68,8 +68,7 @@
 
                             </div>
                             <div class="col-md-4 text-center">
-                                <button class="btn login-btn btn-primary" style="margin-top: 15px;" [disabled]="loading" (click)="filterStock()" type="button"
-                                    *ngIf="!loading">Search</button>
+                                <button class="btn login-btn btn-primary" style="margin-top: 15px;" [disabled]="loading" (click)="filterStock()" type="button" *ngIf="!loading">Search</button>
                                     <button class="btn login-btn btn-primary" style="margin-top: 15px;" [disabled]="loading" type="button" *ngIf="loading">
                                         Loading...
                                         <div class="text-center">
@@ -123,7 +122,6 @@
                                 <td style="text-align: center;font-weight: bold;" *ngIf="loading">
                                     <div class="text-center" *ngIf="loading">
                                         <div class="loader"></div>
-                                        <br>
                                         <span>Loading Stock...</span>
                                     </div>
                                 </td>

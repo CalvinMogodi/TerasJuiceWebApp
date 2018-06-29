@@ -167,7 +167,7 @@
                     <div class="modal-content" style="width: 900px;">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Confirm Order Collection</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" id="closeOrderCollection" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
                         </div>
@@ -176,17 +176,17 @@
                                 <div class="row">
                                      <div class="col-md-4">
                                     <label style="margin-bottom: 0px;">Courier Name</label>
-                                    <input type="text" [value]="collection.courierName" formControlName="courierName" class="form-control underline" (input)="collection.courierName = $event.target.value"
+                                    <input type="text" [value]="orderToCollect.courierName" formControlName="courierName" class="form-control underline" (input)="orderToCollect.courierName = $event.target.value"
                                         name="courierName" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Courier Name">
                                 </div>
                                 <div class="col-md-4">
                                     <label style="margin-bottom: 0px;">Driver Name</label>
-                                    <input type="text" [value]="collection.driverName" formControlName="driverName" class="form-control underline" (input)="collection.driverName = $event.target.value"
+                                    <input type="text" [value]="orderToCollect.driverName" formControlName="driverName" class="form-control underline" (input)="orderToCollect.driverName = $event.target.value"
                                         name="driverName" id="exampleInputPassword1" placeholder="Driver Name">
                                 </div>
                                 <div class="col-md-4">
                                     <label style="margin-bottom: 0px;">Waybill Number</label>
-                                    <input type="test" [value]="collection.waybillNumber" formControlName="waybillNumber" class="form-control underline" (input)="collection.waybillNumber = $event.target.value"
+                                    <input type="test" [value]="orderToCollect.waybillNumber" formControlName="waybillNumber" class="form-control underline" (input)="orderToCollect.waybillNumber = $event.target.value"
                                         name="waybillNumber" id="exampleInputPassword1" placeholder="Waybill Number">
                                 </div>
                                 </div>
