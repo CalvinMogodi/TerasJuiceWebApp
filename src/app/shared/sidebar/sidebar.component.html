@@ -21,6 +21,10 @@
                                             <i class="fa fa-home"></i>
                                             <p>Dashboard</p>
                                     </li>
+                                     <li *ngIf="currentUser.userType != 'User'" class="menu-text text-center" [ngClass]="{'active-menu': activeMenu == 3, 'menu-text': activeMenu != 3}" (click)="navigate('/order'); activeMenu = 3">
+                                            <i class="fa fa-list-alt"></i>
+                                            <p>Order Approval</p>
+                                    </li>
                                     <li *ngIf="currentUser.userType == 'Admin'" class="text-center" [ngClass]="{'active-menu': activeMenu == 11, 'menu-text': activeMenu != 11}" (click)="navigate('/commission'); activeMenu = 11">
                                             <i class="fa fa-money"></i>
                                             <p>Commission</p>
@@ -32,22 +36,15 @@
                                     <li *ngIf="currentUser.userType != 'User'" class="text-center" [ngClass]="{'active-menu': activeMenu == 2, 'menu-text': activeMenu != 2}" (click)="navigate('/user'); activeMenu = 2">                                        
                                             <i class="fa fa-users"></i>
                                             <p>Users</p>
+                                    </li> 
+                                     <li *ngIf="currentUser.userType != 'User'" class="menu-text text-center" [ngClass]="{'active-menu': activeMenu == 5, 'menu-text': activeMenu != 5}" (click)="navigate('/orderReport'); activeMenu = 5">
+                                            <i class="fa fa-file-text-o"></i>
+                                            <p>Order Report</p>
                                     </li>
-                                    <li *ngIf="currentUser.userType != 'User'" class="menu-text text-center" [ngClass]="{'active-menu': activeMenu == 3, 'menu-text': activeMenu != 3}" (click)="navigate('/order'); activeMenu = 3">
-                                            <i class="fa fa-list-alt"></i>
-                                            <p>Orders</p>
-                                    </li>
-                                    <li class="text-center menu-text" *ngIf="currentUser.userType != 'User'">
-                                        <span data-toggle="collapse" href="#collapseReport" >
-                                            <i class="fa fa-home"></i>
-                                            <p >Reports <i class="fa fa-angle-down pull-right" style="padding-right: 15px;    margin-left: -1.5em;"></i></p>
-                                        </span>
-                                         <ul class="collapse" id="collapseReport" style="    font-size: smaller;">
-                                            <li (click)="navigate('/orderReport'); activeMenu = 5" class="text-center" [ngClass]="{'active-menu': activeMenu == 5, 'menu-text': activeMenu != 5}"><i class="fa fa-file-text-o"></i> <p>Orders Report</p></li>
-                                            <li (click)="navigate('/userReport'); activeMenu = 6" class="text-center" [ngClass]="{'active-menu': activeMenu == 6, 'menu-text': activeMenu != 6}"><i class="fa fa-address-card"></i> <p>User Report</p></li>
-                                            <li (click)="navigate('/executiveReport'); activeMenu = 7" class="text-center" [ngClass]="{'active-menu': activeMenu == 7, 'menu-text': activeMenu != 7}"><i class="fa fa-stack-exchange"></i> <p>Executive Report</p></li>
-                                        </ul>
-                                    </li>
+                                    <li *ngIf="currentUser.userType == 'Admin'" class="menu-text text-center" [ngClass]="{'active-menu': activeMenu == 6, 'menu-text': activeMenu != 6}" (click)="navigate('/executiveReport'); activeMenu = 6">
+                                            <i class="fa fa-stack-exchange"></i>
+                                            <p>Executive Report</p>
+                                    </li> 
                                 </ul>
                             </div>
                         </div>

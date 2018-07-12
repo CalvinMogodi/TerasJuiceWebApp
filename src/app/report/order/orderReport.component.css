@@ -178,6 +178,11 @@
         margin-right: -100px;
 }
 
+.dropdown-toggle:after {
+    float: right !important;
+    margin-top: 15px !important;
+}
+
 .progress {
     height: 40px;
     width: 100%;
