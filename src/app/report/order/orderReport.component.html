@@ -1,180 +1,201 @@
-<app-nav [heading]="heading" [headingIcon]="headingIcon"></app-nav>   
+<app-nav [heading]="heading" [headingIcon]="headingIcon"></app-nav>
 <div class="container page">
-        <div class="actionBar" >
-            <form class="row">
-                    <div class="col-md-4">
-                        <div class="input-group">
-                            <label style="margin-bottom: 0px;">From Date</label>
-                            <input class="underline" [(ngModel)]="model" placeholder="dd-mm-yyyy" name="fromDate" ngbDatepicker #fromDate="ngbDatepicker"
-                                required="required">
-                                <div class="input-group-append">
-                                    <button class="calendar-btn" (click)="fromDate.toggle()" type="button">
+    <div class="actionBar">
+        <form class="row">
+            <div class="col-md-2">
+                <div class="input-group">
+                    <label style="margin-bottom: 0px;color: white">Order Number</label>
+                    <input class="underline" [(ngModel)]="orderNumber" placeholder="Order Number" name="orderNumber" required="required">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <label style="margin-bottom: 0px;">From Date</label>
+                    <input class="underline" [(ngModel)]="model" placeholder="dd-mm-yyyy" name="fromDate" ngbDatepicker #fromDate="ngbDatepicker"
+                        required="required">
+                        <div class="input-group-append">
+                            <button class="calendar-btn" (click)="fromDate.toggle()" type="button">
                                         <img src="../assets/img/calendar-icon.jpg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
                                     </button>
-                                </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="input-group">
-                            <label style="margin-bottom: 0px;">To Date</label>
-                            <input class="underline" [(ngModel)]="model1" placeholder="dd-mm-yyyy" name="dp" ngbDatepicker #toDate="ngbDatepicker"
-                                required="required">
-                                <div class="input-group-append">
-                                    <button class="calendar-btn" (click)="toDate.toggle()" type="button">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <label style="margin-bottom: 0px;">To Date</label>
+                    <input class="underline" [(ngModel)]="model1" placeholder="dd-mm-yyyy" name="dp" ngbDatepicker #toDate="ngbDatepicker" required="required">
+                    <div class="input-group-append">
+                        <button class="calendar-btn" (click)="toDate.toggle()" type="button">
                                         <img src="../assets/img/calendar-icon.jpg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
                                     </button>
-                                </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="btn-group">
+                    <button type="button" style="width: 200px;margin-top: 20px;" class="btn btn-secondary dropdown-toggle underline" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span style="float: left">{{statusText}}</span></button>
+                    <div class="dropdown-menu" style="width: 300px">
+                        <span class="dropdown-item" (click)="selectStatus('Pending Payment')">Pending Payment</span>
+                        <span class="dropdown-item" (click)="selectStatus('Awaiting Approval')">Awaiting Approval</span>
+                        <span class="dropdown-item" (click)="selectStatus('Awaiting Final Approval')">Awaiting Final Approval</span>
+                        <span class="dropdown-item" (click)="selectStatus('Awaiting Courier Pickup')">Awaiting Courier Pickup</span>
+                        <span class="dropdown-item" (click)="selectStatus('With Courier')">With Courier</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 text-center" style="margin-top: -20px; margin-bottom: -5px;">
+                <button class="btn login-btn btn-primary" style="margin-top: 15px;width: 150px;" [disabled]="loading" (click)="filterOrders()"
+                    type="button" *ngIf="!loading">Search</button>
+                    <button class="btn login-btn btn-default" style="margin-top: 15px;width: 150px;" (click)="clearSearch()"
+                    type="button" *ngIf="!loading">Clear</button>
+                    <button class="btn login-btn btn-primary" style="margin-top: 15px;width: 150px;" [disabled]="loading" (click)="filterOrders()"
+                        type="button" *ngIf="loading">
+                        Loading...
+                        <div class="text-center">
+                            <div class="loader"></div>
                         </div>
+                        </button>
+            </div>
 
+        </form>
+    </div>
+    <br><br>
+    <div class="calendar-col text-center" style="margin-right: -200px;margin-left: -10px;">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <span class="pendingApprovel-barge"></span>
+                <span class="pendingApprovel-bargeHeader">Orders</span>
+                <table class="table table-striped table-scroll">
+                    <thead>
+                        <tr>
+                            <th style="width: 80px;">Order #</th>
+                            <th>Cost/ Quantity</th>
+                            <th>Order Date</th>
+                            <th>User</th>
+                            <th>Delivery Method</th>
+                            <th>Payment Method</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let order of orders; let i = index; trackBy: trackByIndex' style="font-size: 12px;">
+                            <td style="text-align: start;width: 80px;">{{order.orderNumber}}</td>
+                            <td style="text-align: start;"><b>{{order.cost | currency:'ZAR':true}} </b>&nbsp; ({{order.quantity}})</td>
+                            <td style="text-align: start;">{{order.dateDisplay}}</td>
+                            <td style="text-align: start;">{{order.user}}</td>
+                            <td style="text-align: start;" class="text-overflow">{{order.deliveryMethod}}</td>
+                            <td style="text-align: center;">{{order.paymentMethod}}</td>
+                            <td style="text-align: start;">{{order.status}}</td>
+                            <td style="text-align: center;">
+                                <i class="fa fa-eye" style="font-size: 20px;margin-right: 25px;cursor: pointer" (click)="orderDetails(order)" data-toggle="modal"
+                                    data-target="#exampleModal"></i>
+                            </td>
+                        </tr>
+                        <tr *ngIf='orders.length == 0'>
+                            <td style="text-align: center;font-weight: bold;" *ngIf="!loading">No Order(s)</td>
+                            <td style="text-align: center;font-weight: bold;" *ngIf="loading">
+                                <div class="text-center">
+                                    <div class="order-loader"></div>
+                                    <span>Loading Order(s)...</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-left: 15%;width: 1100px" role="document">
+        <div class="modal-content" style="width: 1100px;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Order Details</h5>
+                <button type="button" id="closeOrderCollection" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <br>
+                <div class="row">
+                    <div class="progress">
+                        <div class="step" [ngClass]="{'done':orderDetail.audit.pendingPaymentDone}">
+                            <div class="step-progress"></div>
+                            <div class="step-text" style="margin-left: 1px !important">Pending Payment</div>
+                            <div class="icon-wrapper">
+                                <svg class="icon icon-checkmark" style="margin-left: 2px;" viewBox="0 0 32 32">
+                                    <path class="path1" d="M27 4l-15 15-7-7-5 5 12 12 20-20z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="step" [ngClass]="{'done':orderDetail.audit.awaitingApprovalDone}">
+                            <div class="step-progress"></div>
+                            <div class="icon-wrapper">
+                                <svg class="icon icon-checkmark" viewBox="0 0 32 32">
+                                    <path class="path1" d="M27 4l-15 15-7-7-5 5 12 12 20-20z"></path>
+                                </svg>
+                                <div class="step-text">Awaiting Approval</div>
+                            </div>
+                        </div>
+                        <div class="step" [ngClass]="{'done':orderDetail.audit.readyForDeliveryDone}">
+                            <div class="step-progress"></div>
+                            <div class="step-text" style="margin-left: -40px;">Ready For Delivery</div>
+                            <div class="icon-wrapper">
+                                <svg class="icon icon-checkmark" viewBox="0 0 32 32">
+                                    <path class="path1" d="M27 4l-15 15-7-7-5 5 12 12 20-20z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="step" [ngClass]="{'done':orderDetail.audit.collectedByCourierDone}">
+                            <div class="icon-wrapper">
+                                <svg class="icon icon-checkmark" viewBox="0 0 32 32">
+                                    <path class="path1" d="M27 4l-15 15-7-7-5 5 12 12 20-20z"></path>
+                                </svg>
+                                <div class="step-text" style="margin-left: -120% !important;">With Courier</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-4 text-center">
-                        <button class="btn login-btn btn-primary" style="margin-top: 15px;" [disabled]="loading" (click)="filterOrders()" type="button" *ngIf="!loading">Search</button>
-                        <button class="btn login-btn btn-primary" style="margin-top: 15px;" [disabled]="loading" (click)="filterOrders()" type="button" *ngIf="loading">               
-                    Loading...   <div class="text-center" > <div class="loader" ></div>           </div>
-                </button>
-                    </div>
-               
-            </form>
-        </div>
-        <br><br>
-        <div class="row" style="margin-right: -20% !important; margin-left: -5px !important;height: 300px">
-            <div class="col-md-6">
-                        <span class="pendingApprovel-barge">{{pendingPaymentOrders.length}}</span>
-                        <span class="pendingApprovel-bargeHeader">Pending Approvel</span>
-                        <table class="table table-striped table-scroll">
-                            <thead>
-                                <tr class="pendingApprovel-header">
-                                    <th>Order #</th>
-                                    <th>Cost/ Quantity</th>
-                                    <th>Date</th>
-                                    <th>Delivery Method</th>
-                                    <th>Payment Method</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor='let order of pendingPaymentOrders' style="font-size: 12px;">
-                                    <td></td>
-                                    <td><b>{{order.cost | currency:'ZAR':true}} </b>&nbsp; ({{order.quantity}})</td>
-                                    <td>{{order.createdDate}}</td>
-                                    <td class="text-overflow">{{order.deliveryMethod}}</td>
-                                    <td>{{order.paymentMethod}}</td>
-                                </tr>
-                                <tr *ngIf='pendingPaymentOrders.length == 0'>
-                                    <td style="text-align: center;" *ngIf="!loading">No Pending Approvel Order(s)</td>     
-                                       <td style="text-align: center;font-weight: bold;" *ngIf="loading">
-                                        <div class="text-center">
-                                        <div class="order-loader" ></div> 
-                                        <span>Loading Order(s)...</span>
-                                    </div>   
-                                    </td>                                 
-                                </tr>
-                            </tbody>
-                        </table>
-                   
-            </div>
-            <div class="col-md-6">
-                        <span class="awaitingApproval-barge">{{awaitingApprovalOrders.length}}</span>
-                        <span class="awaitingApproval-bargeHeader">Awaiting Approval</span>
-                        <table class="table table-striped table-scroll">
-                            <thead>
-                                <tr class="awaitingApproval-heading">
-                                    <th>Order #</th>
-                                    <th>Cost/ Quantity</th>
-                                    <th>Date</th>
-                                    <th>Delivery Method</th>
-                                    <th>Payment Method</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor='let order of awaitingApprovalOrders' style="font-size: 12px;">
-                                    <td></td>
-                                    <td><b>{{order.cost | currency:'ZAR':true}} </b>&nbsp; ({{order.quantity}})</td>
-                                    <td>{{order.createdDate}}</td>
-                                    <td class="text-overflow">{{order.deliveryMethod}}</td>
-                                    <td>{{order.paymentMethod}}</td>
-                                </tr>
-                                 <tr *ngIf='awaitingApprovalOrders.length == 0'>
-                                    <td style="text-align: center" *ngIf="!loading">No Awaiting Approvel Order(s)</td>     
-                                       <td style="text-align: center;font-weight: bold;" *ngIf="loading">
-                                        <div class="text-center">
-                                        <div class="order-loader" ></div> 
-                                        <span>Loading Order(s)...</span>
-                                    </div>   
-                                    </td>                                      
-                                </tr>
-                            </tbody>
-                        </table>
+                </div>
+                <br>
+                <div class="row" style="padding: 0px 15px 0px 15px;">
+                    <label class="col-md-4 col-form-label"><b>Order #: </b> <small>{{orderDetail.orderNumber}}</small></label>
+                    <label class="col-md-4 col-form-label"><b>Cost: </b> <small>{{orderDetail.cost | currency:'ZAR':true}}</small></label>
+                    <label class="col-md-4 col-form-label"><b>Quantity: </b> <small>{{orderDetail.quantity}}</small></label>
+                </div>
+                <div class="row" style="padding: 0px 15px 0px 15px;">
+                    <label class="col-md-4 col-form-label"><b>Order Date: </b> <small>{{orderDetail.dateDisplay}}</small></label>
+                    <label class="col-md-4 col-form-label"><b>User: </b> <small>{{orderDetail.user}}</small></label>
+                    <label class="col-md-4 col-form-label"><b>Status: </b> <small> {{orderDetail.status}}</small></label>
+                </div>
+                <div class="row" style="padding: 0px 15px 0px 15px;">
+                    <label class="col-md-4 col-form-label"><b>Delivery Method: </b> <small>{{orderDetail.deliveryMethod}}</small></label>
+                    <label class="col-md-4 col-form-label"><b>Payment Method: </b> <small>{{orderDetail.paymentMethod}}</small></label>
+                    <label class="col-md-4 col-form-label"><b>Payment Reference: </b> <small>{{orderDetail.reference}}</small></label>
+                </div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Order Statuses</h5>
+                </div>
+                <div class="row" style="padding: 0px 15px 0px 15px;">
+                    <label class="col-md-4 col-form-label" *ngIf="orderDetail.audit.pendingPaymentDone"><b>Captured Date: </b> <small>{{orderDetail.audit.pendingPaymentDate}}</small> </label>
+                    <label class="col-md-4 col-form-label" *ngIf="orderDetail.audit.awaitingApprovalDone"><b>Proof Of Payment Date: </b> <small>{{orderDetail.audit.awaitingApprovalDate}}</small> </label>
+                    <label class="col-md-4 col-form-label" *ngIf="orderDetail.audit.readyForDeliveryDone"><b>Final Approval Date: </b> <small>{{orderDetail.audit.readyForDeliveryDate}}</small> </label>
+                </div>
+                <div class="row" style="padding: 0px 15px 0px 15px;" *ngIf="orderDetail.audit.readyForDeliveryDone">
+                    <label class="col-md-4 col-form-label"></label>
+                    <label class="col-md-4 col-form-label"></label>
+                    <label class="col-md-4 col-form-label" style="text-align: center;"><small>{{orderDetail.approvers[0].user}}</small><br><small>{{orderDetail.approvers[1].user}}</small></label>
+                </div>
+                <div class="modal-header" *ngIf="orderDetail.audit.collectedByCourierDate">
+                    <h5 class="modal-title" id="exampleModalLabel">Order Collection</h5>
+                </div>
+                <div class="row" style="padding: 0px 15px 0px 15px;" *ngIf="orderDetail.audit.collectedByCourierDate">
+                    <label class="col-md-4 col-form-label"><b>Courier Name: </b> <small>{{orderDetail.courierName}}</small> </label>
+                    <label class="col-md-4 col-form-label"><b>Driver Name: </b> <small>{{orderDetail.driverName}}</small> </label>
+                    <label class="col-md-4 col-form-label"><b>Waybill Number: </b> <small>{{orderDetail.waybillNumber}}</small> </label>
+                </div>
             </div>
         </div>
-
-        <div class="row" style="margin-right: -20% !important; margin-left: -5px !important;height: 300px">
-            <div class="col-md-6">
-                        <span class="awaitingApproval-barge">{{awaitingFinalApprovalOrders.length}}</span>
-                        <span class="awaitingApproval-bargeHeader">Awaiting Final Approval</span>
-                        <table class="table table-striped  table-scroll">
-                            <thead>
-                                <tr class="awaitingApproval-heading">
-                                    <th>Order #</th>
-                                    <th>Cost/ Quantity</th>
-                                    <th>Date</th>
-                                    <th>Delivery Method</th>
-                                    <th>Payment Method</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor='let order of awaitingFinalApprovalOrders' style="font-size: 12px;">
-                                    <td></td>
-                                    <td><b>{{order.cost | currency:'ZAR':true}} </b>&nbsp; ({{order.quantity}})</td>
-                                    <td>{{order.createdDate}}</td>
-                                    <td class="text-overflow">{{order.deliveryMethod}}</td>
-                                    <td>{{order.paymentMethod}}</td>
-                                </tr>
-                                 <tr *ngIf='awaitingFinalApprovalOrders.length == 0'>
-                                    <td style="text-align: center;" *ngIf="!loading">No Awaiting Final Approvel Order(s)</td>     
-                                       <td style="text-align: center;font-weight: bold;" *ngIf="loading">
-                                        <div class="text-center">
-                                        <div class="order-loader" ></div> 
-                                        <span>Loading Order(s)...</span>
-                                    </div>   
-                                    </td>                                     
-                                </tr>
-                            </tbody>
-                        </table>
-            </div>
-            <div class="col-md-6">
-                        <span class="approval-barge">{{approvedOrders.length}}</span>
-                        <span class="approval-bargeHeader">Approved</span>
-                        <table class="table table-striped table-scroll">
-                            <thead>
-                                <tr class="approval-heading">
-                                    <th>Order #</th>
-                                    <th>Quantity/ Price</th>
-                                    <th>Date</th>
-                                    <th>Delivery Method</th>
-                                    <th>Payment Method</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor='let order of approvedOrders' style="font-size: 12px;">
-                                    <td></td>
-                                    <td><b>{{order.quantity}} </b>&nbsp;{{order.cost | currency:'ZAR':true}} </td>
-                                    <td>{{order.createdDate}}</td>
-                                    <td class="text-overflow">{{order.deliveryMethod}}</td>
-                                    <td>{{order.paymentMethod}}</td>
-                                </tr>
-                                <tr *ngIf='approvedOrders.length == 0'>
-                                     <td style="text-align: center;" *ngIf="!loading">No Approved Order(s)</td>     
-                                       <td style="text-align: center;font-weight: bold;" *ngIf="loading">
-                                        <div class="text-center">
-                                        <div class="order-loader" ></div> 
-                                        <span>Loading Order(s)...</span>
-                                    </div>   
-                                    </td>                                    
-                                </tr>
-                            </tbody>
-                        </table>
-            </div>
-        </div>
-   
+    </div>
 </div>

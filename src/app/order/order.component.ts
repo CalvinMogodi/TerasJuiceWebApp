@@ -145,7 +145,7 @@ export class OrderComponent implements OnInit {
             this.audit.statusdes = 'readyForDeliveryDone';
             this.audit.date = this.timeConverter(this.dateToTimestamp(new Date().toString()));
         }       
-        this.orderService.approveOrder(order, true, this.audit).then(result => {
+        this.orderService.approveOrder(order, true, this.audit, false).then(result => {
              if (order.status == 'Awaiting Final Approval') {
                  this.notification.meaagse = 'Order is approved successful and waiting for final approval.';
              } else {
@@ -189,11 +189,11 @@ export class OrderComponent implements OnInit {
             this.audit.datedes = 'collectedByCourierDate';
             this.audit.statusdes = 'collectedByCourierDone';
             this.audit.date = this.timeConverter(this.dateToTimestamp(new Date().toString()));
-            this.orderService.approveOrder(this.orderToCollect, true, this.audit).then(result => {
+            this.orderService.approveOrder(this.orderToCollect, true, this.audit, true).then(result => {
+                 this.notification.isSuccessful = true;
                 this.notification.meaagse = 'Order is updated successful.';
             });
-         }
-       
+         }       
     }
 
     sendEmail(order) {

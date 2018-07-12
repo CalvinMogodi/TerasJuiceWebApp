@@ -174,27 +174,28 @@
                         <div class="modal-body">
                             <form [formGroup]="collectionForm">
                                 <div class="row">
-                                     <div class="col-md-4">
-                                    <label style="margin-bottom: 0px;">Courier Name</label>
-                                    <input type="text" [value]="orderToCollect.courierName" formControlName="courierName" class="form-control underline" (input)="orderToCollect.courierName = $event.target.value"
-                                        name="courierName" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Courier Name">
+                                    <div class="col-md-4">
+                                        <label style="margin-bottom: 0px;">Courier Name</label>
+                                        <input type="text" [value]="orderToCollect.courierName" formControlName="courierName" class="form-control underline" (input)="orderToCollect.courierName = $event.target.value"
+                                            name="courierName" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Courier Name">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label style="margin-bottom: 0px;">Driver Name</label>
+                                        <input type="text" [value]="orderToCollect.driverName" formControlName="driverName" class="form-control underline" (input)="orderToCollect.driverName = $event.target.value"
+                                            name="driverName" id="exampleInputPassword1" placeholder="Driver Name">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label style="margin-bottom: 0px;">Waybill Number</label>
+                                        <input type="test" [value]="orderToCollect.waybillNumber" formControlName="waybillNumber" class="form-control underline"
+                                            (input)="orderToCollect.waybillNumber = $event.target.value" name="waybillNumber"
+                                            id="exampleInputPassword1" placeholder="Waybill Number">
+                                    </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <label style="margin-bottom: 0px;">Driver Name</label>
-                                    <input type="text" [value]="orderToCollect.driverName" formControlName="driverName" class="form-control underline" (input)="orderToCollect.driverName = $event.target.value"
-                                        name="driverName" id="exampleInputPassword1" placeholder="Driver Name">
+                                <div class="row pull-right">
+                                    <div>
+                                        <button style="margin-top: 15px;width: 150px;margin-right: 15px;" (click)="submit()" type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <label style="margin-bottom: 0px;">Waybill Number</label>
-                                    <input type="test" [value]="orderToCollect.waybillNumber" formControlName="waybillNumber" class="form-control underline" (input)="orderToCollect.waybillNumber = $event.target.value"
-                                        name="waybillNumber" id="exampleInputPassword1" placeholder="Waybill Number">
-                                </div>
-                                </div>
-                               <div class="row pull-right">
-                                <div >
-                                    <button style="margin-top: 15px;width: 150px;margin-right: 15px;" (click)="submit()" type="submit" class="btn btn-primary">Submit</button>
-                                </div>
-                                 </div>
                             </form>
                         </div>
                     </div>

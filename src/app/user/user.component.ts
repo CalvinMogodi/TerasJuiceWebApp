@@ -51,7 +51,7 @@ export class UserComponent implements OnInit {
     }
 
     filter() {
-        if (this.membershipNo != '') {
+        if (this.membershipNo != '' && this.membershipNo != undefined) {
             this.getUserByMembershipNo(this.membershipNo);
         }
         else {
