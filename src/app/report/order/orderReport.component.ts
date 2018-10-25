@@ -20,9 +20,20 @@ export class OrderReportComponent implements OnInit {
     model: NgbDateStruct;
     model1: NgbDateStruct;
     date: { year: number, month: number };
+   
     orderDetail: {
+        orderNumber: '',
+        cost: '',
+        quantity: '',
+        dateDisplay: '',
+        user: '',
+        status: '',
+        deliveryMethod: '',
+        paymentMethod: '',
+        reference: '',
         audit: {
             pendingPaymentDone: false,
+            collectedByCourierDate: '',
             awaitingApprovalDone: false,
             readyForDeliveryDone: false,
             collectedByCourierDone: false,
@@ -35,8 +46,18 @@ export class OrderReportComponent implements OnInit {
     constructor(public router: Router, public formBuilder: FormBuilder, config: NgbDatepickerConfig) {
         // this.orderDetail.audit = {} 
         this.orderDetail = {
+            orderNumber: '',
+            cost: '',
+            quantity: '',
+            dateDisplay: '',
+            user: '',
+            status: '',
+            deliveryMethod: '',
+            paymentMethod: '',
+            reference: '',
             audit: {
                 pendingPaymentDone: false,
+                collectedByCourierDate: '',
                 awaitingApprovalDone: false,
                 readyForDeliveryDone: false,
                 collectedByCourierDone: false,

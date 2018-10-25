@@ -20,22 +20,22 @@
                 <div id="tabsJustifiedContent" class="tab-content">
                     <div id="home1" class="tab-pane fade actionBar">
                         <form [formGroup]="stockForm" class="row">
-                            <div [ngClass]="{'col-md-4': stock.rejectedStock == 0, 'col-md-3': stock.rejectedStock > 0, 'col-md-6': !isAdmin}">
+                            <div [ngClass]="{'col-md-4': stock.rejectedStock == '0', 'col-md-3': stock.rejectedStock > '0', 'col-md-6': !isAdmin}">
                                 <label style="margin-bottom: 0px;">Manufactured Juices</label>
                                 <input type="number" [value]="stock.newStock" formControlName="newStock" class="form-control underline" (input)="stock.newStock = $event.target.value"
                                     name="newStock" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Manufactured Juices">
                             </div>
-                            <div *ngIf="isAdmin" [ngClass]="{'col-md-4': stock.rejectedStock == 0, 'col-md-3': stock.rejectedStock > 0}">
+                            <div *ngIf="isAdmin" [ngClass]="{'col-md-4': stock.rejectedStock == '0', 'col-md-3': stock.rejectedStock > '0'}">
                                 <label style="margin-bottom: 0px;">Rejected Juices</label>
                                 <input type="number" [value]="stock.rejectedStock" formControlName="rejectedStock" class="form-control underline" (input)="stock.rejectedStock = $event.target.value"
                                     name="rejectedStock" id="exampleInputPassword1" placeholder="Enter Rejected Juices">
                             </div>
-                            <div class="col-md-3" *ngIf="stock.rejectedStock > 0">
+                            <div class="col-md-3" *ngIf="stock.rejectedStock > '0'">
                                 <label style="margin-bottom: 0px;">Reject Comment</label>
                                 <input type="test" [value]="stock.rejectComment" formControlName="rejectComment" class="form-control underline" (input)="stock.rejectComment = $event.target.value"
                                     name="rejectComment" id="exampleInputPassword1">
                             </div>
-                            <div class="text-center" [ngClass]="{'col-md-4': stock.rejectedStock == 0, 'col-md-3': stock.rejectedStock > 0, 'col-md-6': !isAdmin}">
+                            <div class="text-center" [ngClass]="{'col-md-4': stock.rejectedStock == '0', 'col-md-3': stock.rejectedStock > '0', 'col-md-6': !isAdmin}">
                                 <button style="margin-top: 15px;width: 250px;" (click)="submit()" type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </form>

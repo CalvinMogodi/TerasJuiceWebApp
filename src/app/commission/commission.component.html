@@ -25,7 +25,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor='let user of users; let i = index; trackBy: trackByIndex' style="font-size: 12px;">
+                        <tr *ngFor='let user of users; let i = index' style="font-size: 12px;">
                             <td style="text-align: start;">{{user.referredByUser}} </td>
                             <td style="text-align: start;">{{user.name}} {{user.surname}}</td>
                             <td style="text-align: start;">{{user.dateDisplay}}</td>

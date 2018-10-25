@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbDatepickerConfig, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import * as firebase from 'firebase';
 
 @Component({
@@ -15,10 +16,20 @@ export class UserReportComponent implements OnInit {
     users = [];
     userPeople = [];
     currentUser: any;
+    model: NgbDateStruct;
+    model1: NgbDateStruct;
+    date: { year: number, month: number };    
+
     constructor(public router: Router) {      
 
     }
     ngOnInit() {
+
+        var month = new Date().getMonth() + 1;
+            var year = new Date().getFullYear();
+            var lastDay = new Date(year, month, 0).getDate();
+            var day = new Date(year, month + 1, 0).getDay();
+
         this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
         if(this.currentUser.userType == 'User'){
             this.router.navigate(['dashboard']);
@@ -56,5 +67,10 @@ export class UserReportComponent implements OnInit {
             });
         }
         this.loadingUserPeople = false;
+    }
+
+    selectYear(year) {
+        let fromDate = new Date('1-1-' + year);
+        let toDate = new Date('12-31-' + year);
     }
 }

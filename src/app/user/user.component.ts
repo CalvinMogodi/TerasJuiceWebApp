@@ -77,6 +77,11 @@ export class UserComponent implements OnInit {
         this.router.navigate(['userDetails']);
     }
 
+    navigate() {
+        this.commonService.assginUser(null);
+        this.router.navigate(['userDetails']);
+    }
+
     toTimestamp(strDate) {
         var datum = Date.parse(strDate);
         return datum / 1000;

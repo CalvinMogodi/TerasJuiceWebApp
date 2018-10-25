@@ -79,7 +79,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor='let order of orders; let i = index; trackBy: trackByIndex' style="font-size: 12px;">
+                        <tr *ngFor='let order of orders; let i = index' style="font-size: 12px;">
                             <td style="text-align: start;width: 80px;">{{order.orderNumber}}</td>
                             <td style="text-align: start;"><b>{{order.cost | currency:'ZAR':true}} </b>&nbsp; ({{order.quantity}})</td>
                             <td style="text-align: start;">{{order.dateDisplay}}</td>

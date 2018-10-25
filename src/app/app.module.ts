@@ -14,7 +14,6 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { DeshboardComponent } from './deshboard/deshboard.component';
-import { CreatePolicyComponent } from './policy/createPolicy/createPolicy.component';
 import { UserserviceProvider } from './providers/userservice/userservice';
 import { OrderServiceProvider } from './providers/orderservice/orderservice';
 import { StockServiceProvider } from './providers/stockservice/stockservice';
@@ -35,12 +34,12 @@ import { HttpModule } from '@angular/http';
 import { APIService } from './app.apiService';
 
 export const firebaseConfig = {
-    apiKey: "AIzaSyDNZ2-urHkW0xoe9rh9aexpp__FeHybkb8",
-    authDomain: "terasherbal-7694e.firebaseapp.com",
-    databaseURL: "https://terasherbal-7694e.firebaseio.com",
-    projectId: "terasherbal-7694e",
-    storageBucket: "terasherbal-7694e.appspot.com",
-    messagingSenderId: "303502211142"
+  apiKey: "AIzaSyAG_crKE7xA6cevn4x1FbgFVXKtDSD_zhM",
+  authDomain: "terasherbaljuice.firebaseapp.com",
+  databaseURL: "https://terasherbaljuice.firebaseio.com",
+  projectId: "terasherbaljuice",
+  storageBucket: "terasherbaljuice.appspot.com",
+  messagingSenderId: "939142186985"
 };
 firebase.initializeApp(firebaseConfig);
 
@@ -52,7 +51,6 @@ firebase.initializeApp(firebaseConfig);
     LoginComponent,
     SidebarComponent,
     DeshboardComponent,
-    CreatePolicyComponent,
     UserComponent,
     StockComponent,
     UserDetailsComponent,
